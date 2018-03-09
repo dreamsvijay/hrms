@@ -19,7 +19,7 @@ db.runCommand( {
             bsonType: "timestamp",
             description: "User's date of birth"
          },
-		 address: {
+		 addresses: {
             bsonType: "array",
             description: "User's address"
          },
@@ -39,9 +39,9 @@ db.runCommand( {
             bsonType: "string",
             description: "User's password"
          },
-		 profile_picture_id: {
-            bsonType: "object",
-            description: "User's profile picture id"
+		 profile_picture: {
+            bsonType: "string",
+            description: "User's profile picture path"
          },
 		 is_active: {
             bsonType: "bool",
