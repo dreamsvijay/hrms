@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormsModule, } from '@angular/forms';
-import { CommonService } from './common.service';
+import { ApiService } from './api.service';
 
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
@@ -12,13 +12,13 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 export class AppComponent {
 
 
-  constructor(private newService: CommonService, ) { }
+  constructor(private apiService: ApiService, ) { }
   Repdata;
   valbutton = "Save";
 
 
   ngOnInit() {
-    this.newService.GetUser().subscribe(data => this.Repdata = data)
+    this.apiService.getUsers().subscribe(data => this.Repdata = data)
   }
 
   onSave = function (user, isValid: boolean) {
@@ -32,6 +32,7 @@ export class AppComponent {
         , error => this.errorMessage = error)
 
   }
+  
   edit = function (kk) {
     this.id = kk._id;
     this.first_name = kk.first_name;

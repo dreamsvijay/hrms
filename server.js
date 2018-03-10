@@ -1,37 +1,31 @@
+var env = process.env.NODE_ENV || 'development';
+var config = require('./dbConfig')[env];
+
 var express = require('express');
 var path = require("path");
 var bodyParser = require('body-parser');
 var mongo = require("mongoose");
+var app = express();
 
-var db = mongo.connect("mongodb://localhost:27017/hrms", function (err, response) {
+var db = mongo.connect("mongodb://" + config.database.host + ":" + config.database.port + "/" + config.database.db, function (err, response) {
     if (err) { console.log(err); }
     else { console.log('Connected to ' + db, ' + ', response); }
 });
 
-
-var app = express()
 app.use(bodyParser());
 app.use(bodyParser.json({ limit: '5mb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Origin', config.url);
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
 
-var Schema = mongo.Schema;
-
-var UsersSchema = new Schema({
-    first_name: { type: String },
-    last_name: { type: String },
-}, { versionKey: false });
-
-
-var model = mongo.model('users', UsersSchema, 'users');
+var model = mongo.model('users');
 
 app.post("/api/SaveUser", function (req, res) {
     var mod = new model(req.body);
@@ -86,5 +80,5 @@ app.get("/api/getUser", function (req, res) {
 
 
 app.listen(8080, function () {
-    console.log('Example app listening on port 8080!')
+    console.log('HRMS API server listening on port 8080!')
 })
