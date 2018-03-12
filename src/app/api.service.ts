@@ -11,16 +11,12 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  saveUser(user) {
-    return this.http.post('http://localhost:8080/api/SaveUser/', user);
+  singup(user) {
+    return this.http.post('http://localhost:8080/signup', user);
   }
 
-  getUsers() {
-    return this.http.get('http://localhost:8080/api/getUser/');
-  }
-  
-  deleteUser(id) {
-    return this.http.post('http://localhost:8080/api/deleteUser/', { 'id': id });
+  login(user) {
+    return this.http.post('http://localhost:8080/login', user);
   }
 
 } 
