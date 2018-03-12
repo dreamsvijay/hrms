@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 // Localization service 
 import { TranslateService } from '@ngx-translate/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -17,7 +18,7 @@ export class SignUpComponent implements OnInit {
   translate: TranslateService; // <-- defining translate as a private property
   signupForm: FormGroup;
 
-  constructor(translate: TranslateService) {
+  constructor(private apiService: ApiService, translate: TranslateService) {
     this.translate = translate;
     translate.setDefaultLang('en');    
    }
@@ -33,8 +34,11 @@ export class SignUpComponent implements OnInit {
     
   }
 
-  onFormSubmit(signupForm){
-    console.log(signupForm);
+  onFormSubmit = function(signupForm){
+          this.apiService.signup(signupForm)
+      .subscribe(data => {
+        alert(data._id);
+      }, error => this.errorMessage = error);
     return false;
   }
   // Switching language 

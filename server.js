@@ -36,7 +36,7 @@ var userResource = app.resource = user.methods(['get', 'post', 'put', 'delete'])
 
 userResource.route('signup', function(req, res, next){
 	status = false;
-	params = req.query;
+	params = req.body;
 	
 	if ( params.email && params.password ) {
 
@@ -61,8 +61,8 @@ userResource.route('signup', function(req, res, next){
 
 userResource.route('login', function(req, res, next){
 	status = false;
-	params = req.query;
-	
+	params = req.body;
+
 	if ( params.email && params.password ) {
 
 		  var userData = {

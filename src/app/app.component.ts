@@ -31,26 +31,4 @@ export class AppComponent {
 
   ngOnInit() {}
 
-   // save function 
-  onSignup = function (user, isValid: boolean) {
-    user.mode = this.valbutton;
-    this.apiService.signup(user)
-      .subscribe(data => {
-        alert(data.data);
-      }
-        , error => this.errorMessage = error)
-
-  }
-
-     // save function 
-  onLogin = function (user, isValid: boolean) {
-    user.mode = this.valbutton;
-    this.apiService.login(user)
-      .subscribe(data => {
-        alert(data.data);
-      }
-        , error => this.errorMessage = error)
-
-  }
-
 } 
