@@ -3,13 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 // form and http module 
-import { HttpModule } from '@angular/http';
+
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 
 // Commonservice 
-import { CommonService } from './common.service';
+import { ApiService } from './api.service';
 
 // Translate 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -33,7 +33,7 @@ export const createTranslateLoader = (http: HttpClient) => {
   ],
   imports: [
     AppRoutingModule,
-    BrowserModule, HttpModule, FormsModule,
+    BrowserModule,FormsModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
@@ -43,7 +43,7 @@ export const createTranslateLoader = (http: HttpClient) => {
       }
     })
   ],
-  providers: [CommonService],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { } 

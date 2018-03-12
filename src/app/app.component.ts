@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormsModule, } from '@angular/forms';
-import { CommonService } from './common.service';
+import { ApiService } from './api.service';
 import { TranslateService } from '@ngx-translate/core';
 
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +15,7 @@ export class AppComponent {
   
 
   // Injecting Common service and translate service in constructor 
-  constructor(private newService: CommonService, translate: TranslateService ) { 
+  constructor(private apiService: ApiService, translate: TranslateService ) { 
     this.translate = translate;
     translate.setDefaultLang('en');
   }
@@ -33,7 +32,7 @@ export class AppComponent {
 
 // get all user data 
   ngOnInit() {
-    this.newService.GetUser().subscribe(data => this.Repdata = data)
+    this.apiService.getUsers().subscribe(data => this.Repdata = data)
   }
 
    // save function 
