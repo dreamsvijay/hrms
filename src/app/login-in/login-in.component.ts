@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+//Import the API for building a form
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-in',
@@ -10,11 +12,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginInComponent implements OnInit {
 
-    title:string;
+  LoginForm: FormGroup;
   constructor() { }
 
   ngOnInit() {
-    this.title = "Login";
+    this.LoginForm = new FormGroup({      
+      email: new FormControl(),
+      password: new FormControl()     
+
+    })     
+  }
+  onFormSubmit(LoginForm) {
+    console.log(LoginForm);
+    return false;
   }
 
 }

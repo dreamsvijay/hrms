@@ -1,0 +1,20 @@
+{
+    "welcome": "நல்வரவு",
+    "name": "பெயர்",
+    "email": "மின்னஞ்சல்",
+    "password": "கடவுச்சொல்",
+    "confirm Password": "கடவுச்சொல்லை உறுதிப்படுத்துக",
+    "sign up to hrms":"HRMS இல் பதிவு பெறுக",
+    "welcome to":"வரவேற்கிறோம்",
+    "project management" : "திட்ட மேலாண்மை",
+    "invoice management":"விலைப்பட்டியல் மேலாண்மை",
+    "payroll management": "சம்பள மேலாண்மை",
+    "sign up":"பதிவு செய்க",
+    "already have an account" : "ஏற்கனவே ஒரு கணக்கு உள்ளதா",
+    "login" :"உள் நுழை",
+    "login to hrms":"HRMS இல் உள்நுழைக",
+    "forgot password":" கடவுச்சொல் மறந்துவிட்டதா",
+    "signup now" : "ஒரு கணக்கை உருவாக்க",
+    "don’t have an account":"ஒரு கணக்கு இல்லையா?"
+
+}

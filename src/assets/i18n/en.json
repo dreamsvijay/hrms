@@ -1,3 +1,19 @@
 {
-    "welcome": "Welcome!"  
+    "welcome": "Welcome" ,
+    "name" : "Name" ,
+    "email" : "Email" ,
+    "password" : "Password",
+    "confirm Password" : "Confirm Password",
+    "sign up to hrms": "Sign up to HRMS",
+    "welcome to":"Welcome to",
+    "project management": "PROJECT MANAGEMENT",
+    "invoice management": "INVOICE MANAGEMENT",
+    "payroll management": "PAYROLL MANAGEMENT",
+    "sign up":"Signup",
+    "already have an account": "Already have an account",
+    "login": "Login",
+    "login to hrms": "HRMS இல் Login to HRMS",
+    "forgot password": "Forgot Password",
+    "signup now": "Signup now",
+    "don’t have an account": "Don’t have an account"
 }
