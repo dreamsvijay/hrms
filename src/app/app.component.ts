@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormsModule, } from '@angular/forms';
 import { ApiService } from './api.service';
 
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-root',
@@ -11,16 +11,20 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 })
 export class AppComponent {
 
-
-  constructor(private apiService: ApiService, ) { }
+  public modalRef: BsModalRef;
+  
+  constructor(private apiService: ApiService, private modalService: BsModalService) { }
   Repdata;
   valbutton = "Save";
-
 
   ngOnInit() {
     this.apiService.getUsers().subscribe(data => this.Repdata = data)
   }
 
+  openModal(template: "template") {
+    this.modalRef = this.modalService.show(template); // {3}
+  }
+  
   onSave = function (user, isValid: boolean) {
     user.mode = this.valbutton;
     this.newService.saveUser(user)

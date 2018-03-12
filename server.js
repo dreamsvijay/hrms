@@ -18,14 +18,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', config.url);
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
 
-var model = mongo.model('users');
+var usersCollectionName = "users";
+var usersSchema = mongo.Schema({});
+var model = mongo.model(usersCollectionName, usersSchema);
 
 app.post("/api/SaveUser", function (req, res) {
     var mod = new model(req.body);
