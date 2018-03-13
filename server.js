@@ -1,21 +1,21 @@
 var env = process.env.NODE_ENV || 'development';
 var config = require('./dbConfig')[env];
 
-var express = require('express');
-var path = require("path");
-var bodyParser = require('body-parser');
-var mongo = require("mongoose");
+var express = require('express'),
+	bodyParser = require('body-parser'),
+	methodOverride = require('method-override'),
+	morgan = require('morgan'),
+	restful = require('node-restful'),
+	mongo = require("mongoose");
+
 var app = express();
 
-var db = mongo.connect("mongodb://" + config.database.host + ":" + config.database.port + "/" + config.database.db, function (err, response) {
-    if (err) { console.log(err); }
-    else { console.log('Connected to ' + db, ' + ', response); }
-});
 
-app.use(bodyParser());
-app.use(bodyParser.json({ limit: '5mb' }));
-app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({'extended':'true'}));
+app.use(bodyParser.json());
+app.use(bodyParser.json({type:'application/vnd.api+json'}));
+app.use(methodOverride());
 
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -25,61 +25,65 @@ app.use(function (req, res, next) {
     next();
 });
 
-var usersCollectionName = "users";
-var usersSchema = mongo.Schema({});
-var model = mongo.model(usersCollectionName, usersSchema);
 
-app.post("/api/SaveUser", function (req, res) {
-    var mod = new model(req.body);
-    if (req.body.mode == "Save") {
-        mod.save(function (err, data) {
-            if (err) {
-                res.send(err);
-            }
-            else {
-                res.send({ data: "Record has been Inserted..!!" });
-            }
-        });
-    }
-    else {
-        model.findByIdAndUpdate(req.body.id, { first_name: req.body.first_name, last_name: req.body.last_name },
-            function (err, data) {
-                if (err) {
-                    res.send(err);
-                }
-                else {
-                    res.send({ data: "Record has been Updated..!!" });
-                }
-            });
+var db = mongo.connect("mongodb://" + config.database.host + ":" + config.database.port + "/" + config.database.db, function (err, response) {
+    if (err) { console.log(err); }
+    else { console.log('Connected to ' + db, ' + ', response); }
+});
 
+var user = restful.model('users', mongo.Schema({name:String, email:String, password:String}));
+var userResource = app.resource = user.methods(['get', 'post', 'put', 'delete']);
 
-    }
-})
+userResource.route('signup', function(req, res, next){
+	status = false;
+	params = req.body;
+	
+	if ( params.email && params.password ) {
 
-app.post("/api/deleteUser", function (req, res) {
-    model.remove({ _id: req.body.id }, function (err) {
-        if (err) {
-            res.send(err);
-        }
-        else {
-            res.send({ data: "Record has been Deleted..!!" });
-        }
-    });
-})
+		  var userData = {
+		    name: params.name,
+		    email: params.email,
+		    password: params.password,
+		  }
+	
+		  //use schema.create to insert data into the db
+		  status = user.create(userData, function(err, users) {
+		    if (!err) {
+		    	status = users;
+		    }
+		    res.send(status);
+		  });
+	}
+	else {
+		res.send(status);
+	}
+});
 
+userResource.route('login', function(req, res, next){
+	status = false;
+	params = req.body;
 
+	if ( params.email && params.password ) {
 
-app.get("/api/getUser", function (req, res) {
-    model.find({}, function (err, data) {
-        if (err) {
-            res.send(err);
-        }
-        else {
-            res.send(data);
-        }
-    });
-})
+		  var userData = {
+		    email: params.email,
+		    password: params.password,
+		  }
+	
+		  //use schema.create to insert data into the db
+		  user.findOne(userData, function(err, users) {
+		    if ( !err && (users!= null) ) {
+		    	status = users;
+		    }
+		    res.send(status);
+		  });
+	}
+	else {
+		res.send(status);
+	}
+});
 
+userResource.register(app, '/users');
 
 app.listen(8080, function () {
     console.log('HRMS API server listening on port 8080!')
