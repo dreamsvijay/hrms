@@ -16,6 +16,10 @@ export class SignUpComponent implements OnInit {
   
   translate: TranslateService; // <-- defining translate as a private property
   signupForm: FormGroup;
+  name : string;
+  email : string;
+  password : string;
+  confirm_password : string;
 
   constructor(translate: TranslateService) {
     this.translate = translate;
