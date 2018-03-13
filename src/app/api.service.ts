@@ -3,8 +3,6 @@ import { Response, Headers, RequestOptions } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
 
 @Injectable()
 export class ApiService {

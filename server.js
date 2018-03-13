@@ -8,6 +8,11 @@ var express = require('express'),
 	restful = require('node-restful'),
 	mongo = require("mongoose");
 
+var bcrypt = require('bcrypt');
+const saltRounds = 10;
+const myPlaintextPassword = 's0/\/\P4$$w0rD';
+const someOtherPlaintextPassword = 'not_bacon';
+
 var app = express();
 
 
@@ -31,7 +36,43 @@ var db = mongo.connect("mongodb://" + config.database.host + ":" + config.databa
     else { console.log('Connected to ' + db, ' + ', response); }
 });
 
-var user = restful.model('users', mongo.Schema({name:String, email:String, password:String}));
+const Schema = mongo.Schema;
+const ObjectId = Schema.Types.ObjectId;
+
+usersSchema = new mongo.Schema({
+	email: String,
+	password: String,
+    first_name: String,
+    last_name:String,
+	email_id: String,
+    birthday: Date,
+    addresses: Array,
+    contact_numbers: Array,
+    gender: String,
+    type: String,
+    password: String,
+    profile_picture: String,
+    is_active: Boolean,
+    created_by: ObjectId,
+    updated_by: ObjectId,
+    deleted_by: ObjectId,
+    deleted_on: Date
+}, {timestamps: true});
+
+//hashing a password before saving it to the database
+usersSchema.pre('save', function (next) {
+	var users = this;
+	bcrypt.hash(users.password, 10, function (err, hash){
+	  if (err) {
+	    return next(err);
+	  }
+	  users.password = hash;
+	  next();
+	})
+});
+
+var user = restful.model('users', usersSchema);
+
 var userResource = app.resource = user.methods(['get', 'post', 'put', 'delete']);
 
 userResource.route('signup', function(req, res, next){
@@ -41,9 +82,9 @@ userResource.route('signup', function(req, res, next){
 	if ( params.email && params.password ) {
 
 		  var userData = {
-		    name: params.name,
+		    first_name: params.name,
 		    email: params.email,
-		    password: params.password,
+		    password: params.password
 		  }
 	
 		  //use schema.create to insert data into the db
@@ -64,16 +105,13 @@ userResource.route('login', function(req, res, next){
 	params = req.body;
 
 	if ( params.email && params.password ) {
-
-		  var userData = {
-		    email: params.email,
-		    password: params.password,
-		  }
 	
 		  //use schema.create to insert data into the db
-		  user.findOne(userData, function(err, users) {
+		  user.findOne({email: params.email}, function(err, users) {
 		    if ( !err && (users!= null) ) {
-		    	status = users;
+		    		if( bcrypt.compareSync(params.password, users.password) ) {
+		    			status = users;
+		    		}
 		    }
 		    res.send(status);
 		  });
