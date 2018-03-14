@@ -27,13 +27,18 @@ export class LoginInComponent implements OnInit {
   onFormSubmit = function(LoginForm) {
       this.apiService.login(LoginForm)
       .subscribe(data => {
-      	var jwtToken = data.token;
-      	var userId = data.id; 
-      	
-      	localStorage.setItem( userId, jwtToken );
-      	localStorage.setItem( "HRMS_current_user", userId );
-      	
-        this.router.navigate(['home', jwtToken, userId]);
+      	if( data ) {
+	      	var jwtToken = data.token;
+	      	var userId = data.id; 
+	      	
+	      	localStorage.setItem( userId, jwtToken );
+	      	localStorage.setItem( "HRMS_current_user", userId );
+	      	
+	        this.router.navigate(['home']);
+	    }
+	    else {
+	    	this.router.navigate(['']);
+	    }
       }, error => this.errorMessage = error);
     return false;
   }

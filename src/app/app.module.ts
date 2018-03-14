@@ -19,7 +19,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginInComponent } from './login-in/login-in.component';
 
 // Intialize reactive forms
-import { ReactiveFormsModule } from '@angular/forms';  // <-- #1 import module
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppRoutingModule } from './app-routing-module';
@@ -43,7 +43,7 @@ export const createTranslateLoader = (http: HttpClient) => {
     AppRoutingModule,
     BrowserModule, 
     FormsModule,
-    ReactiveFormsModule, // <-- #2 add to @NgModule imports
+    ReactiveFormsModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

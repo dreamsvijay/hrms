@@ -98,7 +98,7 @@ userResource.route('signup', function(req, res, next){
 		  //use schema.create to insert data into the db
 		  status = user.create(userData, function(err, users) {
 		    if (!err) {
-		    	status = users;
+		    	status = { "id": users._id };
 		    }
 		    res.send(status);
 		  });

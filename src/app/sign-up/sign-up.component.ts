@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 // Localization service 
 import { TranslateService } from '@ngx-translate/core';
 import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -15,10 +16,10 @@ import { ApiService } from '../api.service';
 })
 export class SignUpComponent implements OnInit {
   
-  translate: TranslateService; // <-- defining translate as a private property
+  translate: TranslateService;
   signupForm: FormGroup;
 
-  constructor(private apiService: ApiService, translate: TranslateService) {
+  constructor( private apiService: ApiService, translate: TranslateService, private router: Router ) {
     this.translate = translate;
     translate.setDefaultLang('en');    
    }
@@ -37,13 +38,18 @@ export class SignUpComponent implements OnInit {
   onFormSubmit = function(signupForm){
           this.apiService.signup(signupForm)
       .subscribe(data => {
-        alert(data._id);
+      	if( data ) {
+      		this.router.navigate(['log-in']);
+      	}
+      	else {
+      		this.router.navigate(['sign-up']);
+      	}
       }, error => this.errorMessage = error);
     return false;
   }
   // Switching language 
-  switchLanguage = (lang: string) => {  // <-- creating a new method
-    this.translate.use(lang); // <-- invoking `use()`
+  switchLanguage = (lang: string) => {
+    this.translate.use(lang); 
   }
     
 

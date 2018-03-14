@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: [
   				'./dashboard.component.css',
-  			 	'../../assets/fonts/font-awesome.min.css'
-  			 	'../../assets/plugins/morris/morris.css' 
+  			 	'../../assets/fonts/font-awesome.min.css',
+  			 	'../../assets/plugins/morris/morris.css', 
   			 	'../../assets/css/style.css',
   			 ]
 })
 export class DashboardComponent implements OnInit {
   token;
   userId;
-  constructor( private apiService: ApiService, private router: Router, private activatedRoute: ActivatedRoute ) { }
+  constructor( private apiService: ApiService, private router: Router ) { }
 
   ngOnInit() {
   
@@ -25,11 +25,6 @@ export class DashboardComponent implements OnInit {
   	this.loadScript('../../assets/plugins/raphael/raphael-min.js');
   	this.loadScript('../../assets/js/app.js');
   	this.loadScript('../../assets/js/chart.js');
-  	
-  	this.activatedRoute.params.subscribe( (params: Params) => {
-	    this.token = params.token;
-	    this.userId = params.userId;
-	});
   }
 
   onLogout = function() {
