@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 //Import the API for building a form
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-in',
@@ -14,20 +15,25 @@ import { ApiService } from '../api.service';
 export class LoginInComponent implements OnInit {
 
   LoginForm: FormGroup;
-  constructor(private apiService: ApiService) { }
+  constructor( private apiService: ApiService, private router: Router ) { }
 
   ngOnInit() {
     this.LoginForm = new FormGroup({      
       email: new FormControl(),
-      password: new FormControl()     
-
+      password: new FormControl()
     })     
   }
   
   onFormSubmit = function(LoginForm) {
       this.apiService.login(LoginForm)
       .subscribe(data => {
-        alert(data._id);
+      	var jwtToken = data.token;
+      	var userId = data.id; 
+      	
+      	localStorage.setItem( userId, jwtToken );
+      	localStorage.setItem( "HRMS_current_user", userId );
+      	
+        this.router.navigate(['home', jwtToken, userId]);
       }, error => this.errorMessage = error);
     return false;
   }

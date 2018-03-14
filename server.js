@@ -9,12 +9,13 @@ var express = require('express'),
 	mongo = require("mongoose");
 
 var bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
+
 const saltRounds = 10;
 const myPlaintextPassword = 's0/\/\P4$$w0rD';
 const someOtherPlaintextPassword = 'not_bacon';
 
 var app = express();
-
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({'extended':'true'}));
@@ -27,9 +28,16 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
-    next();
+    //intercepts OPTIONS method
+    if ('OPTIONS' === req.method) {
+      //respond with 200
+      res.send(200);
+    }
+    else {
+    //move on
+      next();
+    }
 });
-
 
 var db = mongo.connect("mongodb://" + config.database.host + ":" + config.database.port + "/" + config.database.db, function (err, response) {
     if (err) { console.log(err); }
@@ -110,7 +118,11 @@ userResource.route('login', function(req, res, next){
 		  user.findOne({email: params.email}, function(err, users) {
 		    if ( !err && (users!= null) ) {
 		    		if( bcrypt.compareSync(params.password, users.password) ) {
-		    			status = users;
+		    		    // create a token
+		    		    var token = jwt.sign({ id: users._id }, config.secret, {
+		    		      expiresIn: 3600
+		    		    });
+		    		    status = { "token": token, "id": users._id };
 		    		}
 		    }
 		    res.send(status);
@@ -119,6 +131,19 @@ userResource.route('login', function(req, res, next){
 	else {
 		res.send(status);
 	}
+});
+
+userResource.route('logout', function(req, res, next) {
+	status = false;
+	params = req.query;
+	token = params.token;
+	userId = params.userId;
+	jwt.verify(token, config.secret, function(err, decoded) {
+		if( decoded ) {
+			status = { "id": userId };
+		}
+	});
+	res.send(status);
 });
 
 userResource.register(app, '/users');

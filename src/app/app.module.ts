@@ -23,6 +23,9 @@ import { ReactiveFormsModule } from '@angular/forms';  // <-- #1 import module
 
 
 import { AppRoutingModule } from './app-routing-module';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
+import { AuthGuardService } from './auth-guard.service';
 
 export const createTranslateLoader = (http: HttpClient) => {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -33,7 +36,8 @@ export const createTranslateLoader = (http: HttpClient) => {
   declarations: [
     AppComponent,
     SignUpComponent,
-    LoginInComponent    
+    LoginInComponent,
+    DashboardComponent    
   ],
   imports: [
     AppRoutingModule,
@@ -49,7 +53,7 @@ export const createTranslateLoader = (http: HttpClient) => {
       }
     })
   ],
-  providers: [ApiService],
+  providers: [ApiService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { } 
