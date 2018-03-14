@@ -1,4 +1,275 @@
-<button (click)="onLogout()" class="btn btn-primary">Logout</button>
-<p>
-  dashboard works!
-</p>
+<link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700" rel="stylesheet">
+        <div class="main-wrapper">
+            <div class="header">
+                <div class="header-left">
+                    <a href="index.html" class="logo">
+						<img src="assets/img/logo.png" alt="">
+					</a>
+                </div>
+				<ul class="nav navbar-nav main-menu">
+					<li>
+						<a href="#"><i class="fa fa-files-o"></i> Project Management</a>
+					</li>
+					<li>
+						<a href="invoices.html"><i class="fa fa-bar-chart"></i> Invoice Management</a>
+					</li>
+					<li>
+						<a href="employee.html"><i class="fa fa-user"></i> Payroll Management</a>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right user-menu pull-right">	
+					<li class="dropdown hidden-xs">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <span class="badge pull-right">5</span></a>
+						<div class="dropdown-menu notifications">
+							<div class="topnav-dropdown-header">
+								<span>Notifications</span>
+							</div>
+							<div class="drop-scroll">
+								<ul class="media-list">
+									<li class="media notification-message">
+										<a href="activities.html">
+											<div class="media-left">
+												<span class="avatar">
+													<img alt="John Doe" src="assets/img/user.jpg" class="img-responsive img-circle">
+												</span>
+											</div>
+											<div class="media-body">
+												<p class="m-0 noti-details"><span class="noti-title">John Doe</span> added new task <span class="noti-title">Patient appointment booking</span></p>
+												<p class="m-0"><span class="notification-time">4 mins ago</span></p>
+											</div>
+										</a>
+									</li>
+									<li class="media notification-message">
+										<a href="activities.html">
+											<div class="media-left">
+												<span class="avatar">V</span>
+											</div>
+											<div class="media-body">
+												<p class="m-0 noti-details"><span class="noti-title">Tarah Shropshire</span> changed the task name <span class="noti-title">Appointment booking with payment gateway</span></p>
+												<p class="m-0"><span class="notification-time">6 mins ago</span></p>
+											</div>
+										</a>
+									</li>
+									<li class="media notification-message">
+										<a href="activities.html">
+											<div class="media-left">
+												<span class="avatar">L</span>
+											</div>
+											<div class="media-body">
+												<p class="m-0 noti-details"><span class="noti-title">Misty Tison</span> added <span class="noti-title">Domenic Houston</span> and <span class="noti-title">Claire Mapes</span> to project <span class="noti-title">Doctor available module</span></p>
+												<p class="m-0"><span class="notification-time">8 mins ago</span></p>
+											</div>
+										</a>
+									</li>
+									<li class="media notification-message">
+										<a href="activities.html">
+											<div class="media-left">
+												<span class="avatar">G</span>
+											</div>
+											<div class="media-body">
+												<p class="m-0 noti-details"><span class="noti-title">Rolland Webber</span> completed task <span class="noti-title">Patient and Doctor video conferencing</span></p>
+												<p class="m-0"><span class="notification-time">12 mins ago</span></p>
+											</div>
+										</a>
+									</li>
+									<li class="media notification-message">
+										<a href="activities.html">
+											<div class="media-left">
+												<span class="avatar">V</span>
+											</div>
+											<div class="media-body">
+												<p class="m-0 noti-details"><span class="noti-title">Bernardo Galaviz</span> added new task <span class="noti-title">Private chat module</span></p>
+												<p class="m-0"><span class="notification-time">2 days ago</span></p>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="topnav-dropdown-footer">
+								<a href="activities.html">View all Notifications</a>
+							</div>
+						</div>
+					</li>
+					<li class="dropdown">
+						<a href="profile.html" class="dropdown-toggle user-link" data-toggle="dropdown" title="Ryan Taylor">
+							<span class="user-img"><img class="img-circle" src="assets/img/user.jpg" width="31" alt="Ryan Taylor"></span>
+							<span>Ryan Taylor</span>
+							<i class="caret"></i>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Settings</a></li>
+							<li><a href="javascript:void(0);" (click)="onLogout()">Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+            </div>
+            <div class="page-wrapper">
+                <div class="content container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="welcome-box">
+								<h3>Welcome to HRMS</h3>
+							</div>
+						</div>
+					</div>
+					<div class="chart-section">
+							<div class="chart-box">
+								<h4>Projects</h4>
+								<div class="row chart-row">
+									<div class="col-md-6">
+										<div class="chart-widget">
+											<div id="donutchart"></div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="chart-result flex-container">
+											<ul class="chart-list">
+												<li>
+													<div class="chart-cont">
+														<div class="chart-stats">
+															<span class="stats-count open-invoice">2</span>
+														</div>
+														<div class="chart-info">
+															<span class="chart-title text-ellipsis">open projects</span>
+															<span class="chart-count">365.50</span>
+														</div>
+														
+													</div>
+												</li>
+												<li>
+													<div class="chart-cont">
+														<div class="chart-stats">
+															<span class="stats-count overdue-low">0</span>
+														</div>
+														<div class="chart-info">
+															<span class="chart-title text-ellipsis">projects overdue < 30 days</span>
+															<span class="chart-count">0.00</span>
+														</div>
+														
+													</div>
+												</li>
+												<li>
+													<div class="chart-cont">
+														<div class="chart-stats">
+															<span class="stats-count overdue-high">0</span>
+														</div>
+														<div class="chart-info">
+															<span class="chart-title text-ellipsis">Projects overdue > 30 days</span>
+															<span class="chart-count">0.00</span>
+														</div>
+														
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="chart-box">
+								<h4>Invoices</h4>
+								<div class="row chart-row">
+									<div class="col-md-6">
+										<div class="chart-widget">
+											<div id="donutchart2"></div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="chart-result">
+											<ul class="chart-list">
+												<li>
+													<div class="chart-cont">
+														<div class="chart-stats">
+															<span class="stats-count open-invoice">2</span>
+														</div>
+														<div class="chart-info">
+															<span class="chart-title text-ellipsis">open projects</span>
+															<span class="chart-count">365.50</span>
+														</div>
+														
+													</div>
+												</li>
+												<li>
+													<div class="chart-cont">
+														<div class="chart-stats">
+															<span class="stats-count overdue-low">0</span>
+														</div>
+														<div class="chart-info">
+															<span class="chart-title text-ellipsis">projects overdue < 30 days</span>
+															<span class="chart-count">0.00</span>
+														</div>
+														
+													</div>
+												</li>
+												<li>
+													<div class="chart-cont">
+														<div class="chart-stats">
+															<span class="stats-count overdue-high">0</span>
+														</div>
+														<div class="chart-info">
+															<span class="chart-title text-ellipsis">Projects overdue > 30 days</span>
+															<span class="chart-count">0.00</span>
+														</div>
+														
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="chart-box">
+								<h4>Payroll</h4>
+								<div class="row chart-row">
+									<div class="col-md-6">
+										<div class="chart-widget">
+											<div id="donutchart3"></div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="chart-result">
+											<ul class="chart-list">
+												<li>
+													<div class="chart-cont">
+														<div class="chart-stats">
+															<span class="stats-count open-invoice">2</span>
+														</div>
+														<div class="chart-info">
+															<span class="chart-title text-ellipsis">open projects</span>
+															<span class="chart-count">365.50</span>
+														</div>
+														
+													</div>
+												</li>
+												<li>
+													<div class="chart-cont">
+														<div class="chart-stats">
+															<span class="stats-count overdue-low">0</span>
+														</div>
+														<div class="chart-info">
+															<span class="chart-title text-ellipsis">projects overdue < 30 days</span>
+															<span class="chart-count">0.00</span>
+														</div>
+														
+													</div>
+												</li>
+												<li>
+													<div class="chart-cont">
+														<div class="chart-stats">
+															<span class="stats-count overdue-high">0</span>
+														</div>
+														<div class="chart-info">
+															<span class="chart-title text-ellipsis">Projects overdue > 30 days</span>
+															<span class="chart-count">0.00</span>
+														</div>
+														
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+					</div>
+				</div>			
+			</div>
+        </div>

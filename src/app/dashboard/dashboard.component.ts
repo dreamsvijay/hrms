@@ -5,7 +5,12 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: [
+  				'./dashboard.component.css',
+  			 	'../../assets/fonts/font-awesome.min.css'
+  			 	'../../assets/plugins/morris/morris.css' 
+  			 	'../../assets/css/style.css',
+  			 ]
 })
 export class DashboardComponent implements OnInit {
   token;
@@ -13,6 +18,14 @@ export class DashboardComponent implements OnInit {
   constructor( private apiService: ApiService, private router: Router, private activatedRoute: ActivatedRoute ) { }
 
   ngOnInit() {
+  
+  	this.loadScript('../../assets/js/jquery-3.2.1.min.js');
+	this.loadScript('../../assets/js/bootstrap.min.js');
+  	this.loadScript('../../assets/plugins/morris/morris.min.js');
+  	this.loadScript('../../assets/plugins/raphael/raphael-min.js');
+  	this.loadScript('../../assets/js/app.js');
+  	this.loadScript('../../assets/js/chart.js');
+  	
   	this.activatedRoute.params.subscribe( (params: Params) => {
 	    this.token = params.token;
 	    this.userId = params.userId;
@@ -30,4 +43,14 @@ export class DashboardComponent implements OnInit {
       }, error => this.errorMessage = error);
     return false;
   }
+  
+	 public loadScript(url) {
+	        let body = <HTMLDivElement> document.body;
+	        let script = document.createElement('script');
+	        script.innerHTML = '';
+	        script.src = url;
+	        script.async = true;
+	        script.defer = true;
+	        body.appendChild(script);
+    }
 }

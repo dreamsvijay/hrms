@@ -321,6 +321,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c6b5fb', end
     text-transform: uppercase;
 }
 
+.navbar-nav {display: block;}
 .main-menu {margin: 0;position:relative;z-index:99;	}
 .main-menu.nav > li > a {
     color: #fff;
