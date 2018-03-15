@@ -3,7 +3,7 @@
     "name" : "Name" ,
     "email" : "Email" ,
     "password" : "Password",
-    "confirm Password" : "Confirm Password",
+    "confirm password" : "Confirm Password",
     "sign up to hrms": "Sign up to HRMS",
     "welcome to":"Welcome to",
     "project management": "PROJECT MANAGEMENT",

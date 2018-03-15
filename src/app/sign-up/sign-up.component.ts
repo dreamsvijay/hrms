@@ -16,29 +16,44 @@ import { Router } from '@angular/router';
 })
 export class SignUpComponent implements OnInit {
   
-  translate: TranslateService;
+  translate: TranslateService; // <-- defining translate as a private property
   signupForm: FormGroup;
-
+  name : string;
+  email : string;
+  password : string;
+  confirm_password : string;
+  forbiddenUsernames = ['Boomi', 'Nathan']; 
   constructor( private apiService: ApiService, translate: TranslateService, private router: Router ) {
+	
     this.translate = translate;
     translate.setDefaultLang('en');    
    }
 
   ngOnInit() {
     this.signupForm = new FormGroup({
-      name: new FormControl(),
-      email: new FormControl(),
-      password: new FormControl(),
-      confirm_password: new FormControl()
+      'name': new FormControl(null,Validators.required),
+      'email': new FormControl(null, [Validators.required, Validators.email]),      
+      'password': new FormControl(null, [Validators.required]),
+      'confirm_password': new FormControl(null,Validators.required)     
       
     })   
     
   }
 
+forbiddenNames(control : FormControl):{[s:string]:boolean}{
+    if (this.forbiddenUsernames.indexOf(control.value) !== -1){
+      return { 'nameIsForbidden':true };
+    }else{
+      return { 'nameIsForbidden': false };
+    }
+  }
+
+  
   onFormSubmit = function(signupForm){
           this.apiService.signup(signupForm)
       .subscribe(data => {
       	if( data ) {
+          console.log(data);
       		this.router.navigate(['log-in']);
       	}
       	else {
