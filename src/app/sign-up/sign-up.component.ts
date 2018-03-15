@@ -6,6 +6,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
 
+import { AuthService } from "angular4-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider } from "angular4-social-login";
+
+import { SocialUser } from "angular4-social-login";
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -23,7 +28,11 @@ export class SignUpComponent implements OnInit {
   password : string;
   confirm_password : string;
   forbiddenUsernames = ['Boomi', 'Nathan']; 
-  constructor( private apiService: ApiService, translate: TranslateService, private router: Router ) {
+  
+  private user: SocialUser;
+  private loggedIn: boolean;
+  
+  constructor( private apiService: ApiService, translate: TranslateService, private router: Router,private authService: AuthService ) {
 	
     this.translate = translate;
     translate.setDefaultLang('en');    
@@ -34,9 +43,14 @@ export class SignUpComponent implements OnInit {
       'name': new FormControl(null,Validators.required),
       'email': new FormControl(null, [Validators.required, Validators.email]),      
       'password': new FormControl(null, [Validators.required]),
-      'confirm_password': new FormControl(null,Validators.required)     
-      
-    })   
+      'confirm_password': new FormControl(null,Validators.required)
+    });
+    
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+      console.log(this.user);
+    });   
     
   }
 
@@ -62,6 +76,19 @@ forbiddenNames(control : FormControl):{[s:string]:boolean}{
       }, error => this.errorMessage = error);
     return false;
   }
+  
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+ 
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
+ 
+  signOut(): void {
+    this.authService.signOut();
+  }
+  
   // Switching language 
   switchLanguage = (lang: string) => {
     this.translate.use(lang); 
