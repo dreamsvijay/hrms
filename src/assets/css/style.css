@@ -192,13 +192,13 @@ table.dataTable {margin-bottom: 15px !important;margin-top: 15px !important;}
 .page-wrapper {padding-top: 50px;position: relative;-webkit-transition: all 0.4s ease;-moz-transition: all 0.4s ease;transition: all 0.4s ease;}
 .page-wrapper > .content{padding:0;}
 
-/* Login */
+.login-body {display:table;}
 .login-wrapper{ background: #c6b5fb;
 background: -moz-linear-gradient(-45deg, #c6b5fb 0%, #9e78ec 100%);
 background: -webkit-linear-gradient(-45deg, #c6b5fb 0%,#9e78ec 100%);
 background: linear-gradient(135deg, #c6b5fb 0%,#9e78ec 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c6b5fb', endColorstr='#9e78ec',GradientType=1 ); width:100%; height:100%;}
-.login-wrapper .loginbox{ width:800px; min-height:500px; background:#fff; margin:80px auto; box-shadow:0 0 30px rgba(0,0,0,0.3); border-radius:6px;}
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c6b5fb', endColorstr='#9e78ec',GradientType=1 ); width:100%; height:100%;display: table-cell;vertical-align: middle;}
+.login-wrapper .loginbox{ width:800px; min-height:500px; background:#fff; margin:30px auto; box-shadow:0 0 30px rgba(0,0,0,0.3); border-radius:6px;}
 .login-wrapper .loginbox .loginleft{ width:400px; min-height:500px; float:left; background:url(../img/loginbg.jpg) no-repeat #a251e1; background-size:auto 100%; border-radius:6px 0 0 6px; text-align:center; padding:80px;}
 .login-wrapper .loginbox .loginleft h3{ font-size:24px; font-weight:400; color:#621e97; margin:0; padding:0;}
 .login-wrapper .loginbox .loginleft h1{ font-size:38px; font-weight:700; color:#fff; margin:0; padding:0;}
@@ -206,8 +206,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c6b5fb', end
 .login-wrapper .loginbox .loginleft ul li{ display:block; color:#fff; text-transform:uppercase; margin:0 0 15px; line-height:48px;}
 .login-wrapper .loginbox .loginleft ul li span{ width:50px; height:50px; background:rgba(98,29,152,0.5); display:inline-block; border-radius:50%; margin-right:15px; color:#fff; font-size:18px; font-family:'Font Awesome';}
 .login-wrapper .loginbox .loginright{ width:400px; float:left; padding:50px;}
-.login-wrapper .loginbox .loginright h1{ font-size:21px; font-weight:600; color:#666; margin:0 0 60px; padding:0; text-align:center;}
-.login-wrapper .loginbox .loginright input[type=submit]{ font-size:18px; font-weight:600; height:50px;}
+.login-wrapper .loginbox .loginright h1{ font-size:21px; font-weight:600; color:#666; margin:0 0 40px; padding:0; text-align:center;}
+.login-wrapper .loginbox .loginright input[type=submit]{ font-size:18px; font-weight:600; height:40px;}
 .login-wrapper .loginbox .loginright .forgotpass a{ color:#a0a0a0;}
 .login-wrapper .loginbox .loginright .forgotpass a:hover{ color:#621d98; text-decoration:underline;}
 .login-wrapper .loginbox .loginright .donthave { color:#a0a0a0; margin-top:35px;}
@@ -216,7 +216,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c6b5fb', end
 .login-wrapper .signupbox, .login-wrapper .signupbox .loginleft{ min-height:565px; background-size:auto 100%;}
 .login-wrapper .signupbox .loginright{ padding:40px 50px;}
 .login-wrapper .signupbox .loginright h1{ margin-bottom:30px;}
-.login-wrapper .signupbox .loginright .donthave{ margin-top:0;}
 
 
 /* Select2 */
@@ -427,3 +426,15 @@ form label {color: #666;font-weight: normal;}
 .expanded .section-left {width:100%;}
 .expanded .section-right {display:none;}
 /* .expanded .expand-icon { background: transparent url("assets/img/left-arrow.png") no-repeat scroll center center / 100% auto;} */
+
+/* Login */
+
+.social-login {text-align: center;}
+.social-login > span {color: #a0a0a0;margin-right: 8px;}
+.social-login > a {background-color: #ccc;border-radius: 4px;color: #fff;display: inline-block;font-size: 18px;height: 32px;line-height:32px;margin-right: 4px;text-align: center;width: 32px;}
+.social-login > a:last-child {margin-right:0;}
+.social-login > a.facebook {background-color:#4b75bd;}
+.social-login > a.google {background-color:#fe5240;}
+.login-or {color: #a0a0a0;margin-bottom: 20px;margin-top: 28px;padding-bottom: 10px;padding-top: 10px;position: relative;}
+.or-line {background-color: #e5e5e5;height: 1px;margin-bottom: 0;margin-top: 0;display:block;}
+.span-or {background-color: #fff;display: block;left: 50%;margin-left: -20px;position: absolute;text-align: center;text-transform: uppercase;top: 0;width: 42px;}

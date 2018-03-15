@@ -18,10 +18,12 @@ export class LoginInComponent implements OnInit {
   constructor( private apiService: ApiService, private router: Router ) { }
 
   ngOnInit() {
-    this.LoginForm = new FormGroup({      
-      email: new FormControl(),
-      password: new FormControl()
-    })     
+    this.LoginForm = new FormGroup(
+      {      
+      'email': new FormControl(null, [Validators.required, Validators.email]),
+      'password': new FormControl(null, [Validators.required]),
+    }
+  )     
   }
   
   onFormSubmit = function(LoginForm) {

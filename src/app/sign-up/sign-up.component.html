@@ -1,4 +1,4 @@
-  <div class="main-wrapper">
+<div class="main-wrapper login-body">
     <div class="login-wrapper">
       <div class="container">
         <div class="loginbox signupbox">
@@ -23,40 +23,48 @@
           <div class="loginright">
             <h1>{{ "sign up to hrms" | translate }}</h1>
             <form action="#" [formGroup]="signupForm"   (ngSubmit)="onFormSubmit(signupForm.value)"  title="Please enter your name">
-              <div class="form-group">
-                <label>{{ "name" | translate }}</label>
-                <input class="form-control" type="text" formControlName = "name">
+              <div class="form-group">                
+                <input class="form-control" type="text" formControlName = "name" placeholder="{{ 'name' | translate }}">
                 <span *ngIf="signupForm.get('name').hasError('required') && signupForm.get('name').touched" class="help-block">Enter name</span>
-                <span *ngIf="signupForm.get('name').errors['nameIsForbidden']" class="help-block">Enter valid name</span>
+                <!-- <span *ngIf="signupForm.get('name').errors['nameIsForbidden']" class="help-block">Enter valid name</span> -->
               </div>
-              <div class="form-group">
-                <label>{{ "email" | translate}}</label>
-                <input class="form-control" type="text" formControlName = "email" title="Please enter your email">                                
+              <div class="form-group">                
+                <input class="form-control" type="text" formControlName = "email" title="Please enter your email" placeholder="{{ 'email' | translate }}">                                
                 <span class="help-block" *ngIf="signupForm.get('email').hasError('required') && signupForm.get('email').touched && !signupForm.get('email').dirty">Enter email</span>
                 <span class="help-block" *ngIf="signupForm.get('email').hasError('email') && signupForm.get('email').dirty">Enter valid email</span>
               </div>
-              <div class="form-group">
-                <label>{{ "password" | translate}}</label>
-                <input class="form-control" type="password" formControlName = "password" title="Please enter your password">
+              <div class="form-group">                
+                <input class="form-control" type="password" formControlName = "password" title="Please enter your password" placeholder="{{ 'password' | translate }}">
                 <span class="help-block" *ngIf="signupForm.get('password').hasError('required') && signupForm.get('password').touched">Enter password</span>
               </div>
-              <div class="form-group">
-                <label>{{ "confirm Password" | translate }}</label>
-                <input class="form-control" type="password" formControlName = "confirm_password" title="Please re-enter your password">
-                <span class="help-block" *ngIf="signupForm.get('confirm_password').hasError('required') && signupForm.get('confirm_password').touched">Enter confirm password</span>
-                <span class="help-block" *ngIf="signupForm.get('confirm_password').hasError('passwordMismatch') && signupForm.get('confirm_password').touched">password doesnot match</span>
+              <div class="form-group">                
+                <input class="form-control" type="password" formControlName = "confirm_password" title="Please re-enter your password" placeholder="{{ 'confirm password' | translate }}">
+                <span class="help-block" *ngIf="signupForm.get('confirm_password').hasError('required') && signupForm.get('confirm_password').touched">Enter confirm password</span>               
               </div>              
               <div class="form-group">
                 <input class="form-control btn btn-orange" type="submit" value="{{ 'sign up' | translate }}" [disabled] = "!signupForm.valid">
               </div>
             </form>
+            <div class="login-or">
+              <span class="or-line"></span>
+              <span class="span-or">or</span>
+            </div>
+            <div class="social-login">
+              <span>Signup with</span>
+              <a href="#" class="facebook">
+                <i class="fa fa-facebook"></i>
+              </a>
+              <a href="#" class="google">
+                <i class="fa fa-google"></i>
+              </a>
+            </div>
             <div class="text-center donthave">{{ "already have an account" | translate }}?
               <a routerLink="/log-in">{{ 'login' | translate }}</a>
             </div>
 
             <!--- Log the FormGroup values to see if the binding is working -->
-            <!-- <p>Form value {{ signupForm.value | json }} </p>
-            <p> Form status {{ signupForm.status | json}} </p> -->
+              <!-- <p>Form value {{ signupForm.value | json }} </p>
+              <p> Form status {{ signupForm.status | json}} </p> -->
             
           </div>
         </div>

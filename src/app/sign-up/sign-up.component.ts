@@ -22,19 +22,19 @@ export class SignUpComponent implements OnInit {
   email : string;
   password : string;
   confirm_password : string;
-
+  forbiddenUsernames = ['Boomi', 'Nathan']; 
   constructor( private apiService: ApiService, translate: TranslateService, private router: Router ) {
-	forbiddenUsernames= ['Boomi','Nathan']; 
+	
     this.translate = translate;
     translate.setDefaultLang('en');    
    }
 
   ngOnInit() {
     this.signupForm = new FormGroup({
-      'name': new FormControl(null,[Validators.required,this.forbiddenNames.bind(this)]),
-      'email': new FormControl(null, [Validators.required, Validators.email, Validators.minLength(5)]),      
+      'name': new FormControl(null,Validators.required),
+      'email': new FormControl(null, [Validators.required, Validators.email]),      
       'password': new FormControl(null, [Validators.required]),
-      'confirm_password': new FormControl(null, Validators.required)     
+      'confirm_password': new FormControl(null,Validators.required)     
       
     })   
     
@@ -42,15 +42,18 @@ export class SignUpComponent implements OnInit {
 
 forbiddenNames(control : FormControl):{[s:string]:boolean}{
     if (this.forbiddenUsernames.indexOf(control.value) !== -1){
-      return {'nameIsForbidden':true};
+      return { 'nameIsForbidden':true };
     }else{
       return { 'nameIsForbidden': false };
     }
   }
+
+  
   onFormSubmit = function(signupForm){
           this.apiService.signup(signupForm)
       .subscribe(data => {
       	if( data ) {
+          console.log(data);
       		this.router.navigate(['log-in']);
       	}
       	else {
