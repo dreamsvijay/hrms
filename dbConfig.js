@@ -12,7 +12,9 @@ var config = {
 	    server: {
 	        host: '127.0.0.1',
 	        port: '4200'
-	    }
+	    },
+	    
+	    secret: 'HRMS_AUTHENTICATION_SECRET_KEY'
 	},
 	production: {
 	    //url to be used in link generation
@@ -27,7 +29,9 @@ var config = {
 	    server: {
 	        host:   '127.0.0.1',
 	        port:   '3421'
-	    }
+	    },
+	    
+	    secret: 'HRMS_AUTHENTICATION_SECRET_KEY'
 	}
 };
 
