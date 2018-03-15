@@ -54,8 +54,8 @@ usersSchema = new mongo.Schema({
     last_name:String,
 	email_id: String,
     birthday: Date,
-    addresses: Array,
-    contact_numbers: Array,
+    addresses: Object,
+    contact_numbers: Object,
     gender: String,
     type: String,
     password: String,
@@ -147,6 +147,34 @@ userResource.route('logout', function(req, res, next) {
 });
 
 userResource.register(app, '/users');
+
+customersSchema = new mongo.Schema({
+	name: String,
+	title: String,
+    logo_id: String,
+    company_no:String,
+	gst_no: String,
+    email: String,
+    addresses: Object,
+    contact_numbers: Object,
+    fax: String,
+    website_url: String,
+    invoice_language_id: String,
+    payment_terms: String,
+    tax_id: Boolean,
+    type: String,
+    is_active: Boolean,
+    created_by: ObjectId,
+    updated_by: ObjectId,
+    deleted_by: ObjectId,
+    deleted_on: Date
+}, {timestamps: true});
+
+var customers = restful.model('companies', customersSchema);
+
+var customersResource = app.resource = customers.methods(['get', 'post', 'put', 'delete']);
+
+customersResource.register(app, '/customers');
 
 app.listen(8080, function () {
     console.log('HRMS API server listening on port 8080!')

@@ -26,6 +26,7 @@ import { AppRoutingModule } from './app-routing-module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { AuthGuardService } from './auth-guard.service';
+import { CustomerComponent } from './customer/customer.component';
 
 export const createTranslateLoader = (http: HttpClient) => {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -37,7 +38,8 @@ export const createTranslateLoader = (http: HttpClient) => {
     AppComponent,
     SignUpComponent,
     LoginInComponent,
-    DashboardComponent    
+    DashboardComponent,
+    CustomerComponent    
   ],
   imports: [
     AppRoutingModule,

@@ -17,8 +17,7 @@ export class DashboardComponent implements OnInit {
   userId;
   constructor( private apiService: ApiService, private router: Router ) { }
 
-  ngOnInit() {
-  
+  ngOnInit() {  
   	this.loadScript('../../assets/js/jquery-3.2.1.min.js');
 	this.loadScript('../../assets/js/bootstrap.min.js');
   	this.loadScript('../../assets/plugins/morris/morris.min.js');

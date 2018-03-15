@@ -35,7 +35,41 @@ export class ApiService {
       catchError(this.handleError<any>('User Logout Error'))
     );
   }
-  
+
+	createCustomer(customer): Observable<any> {
+		var customerParams = {
+			name: customer.company_name,
+			title: customer.title,
+		    company_no: customer.company_number,
+			gst_no: customer.gst_number,
+		    email: customer.email,
+		    addresses: {
+		    			invoice_address: {
+		    				address_line_1: customer.invoice_address_line1,
+		    				address_line_2: customer.invoice_address_line2,
+		    				postcode: customer.invoice_postcode,
+		    				city: customer.invoice_city,
+		    				country: customer.invoice_country
+		    			}
+		    },
+		    contact_numbers: {
+		    	phone: customer.phone, 
+		    	mobile_number: customer.mobile_phone
+		    }
+		};
+	    return this.http.post('http://localhost:8080/customers', customerParams).pipe(
+	      tap(_ => console.log(`${customer.email} created successfully`)),
+	      catchError(this.handleError<any>('Customer Creation Error'))
+	    );
+	}
+
+	getCustomers(): Observable<any> {
+	    return this.http.get(`${this.ApiServiceUrl}/customers`).pipe(
+	      tap(_ => console.log(`Fetched customers successfully`)),
+	      catchError(this.handleError<any>('Customers Fetch Error'))
+	    );
+	}
+    
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

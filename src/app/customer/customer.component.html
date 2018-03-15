@@ -1,0 +1,249 @@
+       <div class="main-wrapper">
+            <div class="header">
+                <div class="header-left">
+                    <a href="/home" class="logo">
+						<img src="assets/img/logo.png" alt="">
+					</a>
+                </div>
+				<ul class="nav navbar-nav main-menu">
+					<li class="active">
+						<a href="/customer">Customers</a>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right user-menu pull-right">
+					<li class="dropdown">
+						<a href="profile.html" class="dropdown-toggle user-link" data-toggle="dropdown" title="Ryan Taylor">
+							<span class="user-img"><img class="img-circle" src="assets/img/user.jpg" width="31" alt="Ryan Taylor"></span>
+							<span>Ryan Taylor</span>
+							<i class="caret"></i>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="javascript:void(0);" (click)="onLogout()">Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+            </div>
+            <div class="page-wrapper">
+                <div class="content container-fluid">
+					<div class="page-inner">
+						<div class="display-table">
+							<div class="section-left">
+								<div class="display-table">
+									<div class="table-row">
+										<div class="table-body">
+											<div class="table-inner">
+												<div class="sec-content border-top p-b-0">
+													<div class="search-sec">
+														<div class="row">
+															<div class="col-md-6 col-xs-10">
+																<div class="input-group">
+																	<span class="input-group-addon"><i class="fa fa-search"></i></span>
+																	<input type="text" placeholder="Search in the list" class="form-control">
+																</div>
+															</div>
+															<div class="col-md-6 col-xs-2">
+																<a href="javascript:;" class="expand-icon"></a>
+															</div>
+														</div>
+													</div>
+													<div class="table-responsive invoice-table">
+														<table class="table no-border">
+															<thead>
+																<tr>
+																	<th style="min-width:40%;">Customer Name</th>
+																	<th style="min-width:28%;">Email</th>
+																	<th style="min-width:12%;text-align:right;">Uninvoiced</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr *ngFor="let customer of customers">
+																	<td>{{customer.name}}</td>
+																	<td>{{customer.email}}</td>
+																	<td class="text-right">0.00</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="invoice-total">
+										<div class="table-responsive">
+											<table class="table m-b-0">
+												<tbody>
+													<tr>
+														<td style="min-width:8%;"></td>
+														<td style="min-width:40%;"></td>
+														<td style="min-width:28%;"></td>
+														<td style="min-width:12%;">Total</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="section-right">
+								<div class="display-table">
+									<div class="button-sec">
+										<a class="btn btn-orange">Add New Customer</a>
+									</div>
+									<div class="table-row">
+										<div class="table-body">
+											<div class="table-inner contact-inner">
+												<div class="contact-details">
+													<div class="contact-form">
+														<form action="#" [formGroup]="customerForm"   (ngSubmit)="onFormSubmit()">
+															<div class="row">
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label>Customer number</label>
+																		<input class="form-control" type="text" formControlName = "customer_number">
+																	</div>
+																</div>
+															</div>
+															<h4 class="form-title">Contact Details</h4>
+															<div class="row">
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label>Company name</label>
+																		<input class="form-control" type="text" formControlName = "company_name">
+																	</div>
+																</div>
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label>Company number</label>
+																		<input class="form-control" type="text" placeholder="Eg. 0125478963" formControlName = "company_number">
+																	</div>
+																</div>
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label>GST number</label>
+																		<input class="form-control" type="text" placeholder="Eg. CS98976 546" formControlName = "gst_number">
+																	</div>
+																</div>
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label>Title</label>
+																		<input class="form-control" type="text" formControlName = "title">
+																	</div>
+																</div>
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label>First name</label>
+																		<input class="form-control" type="text" formControlName = "first_name">
+																	</div>
+																</div>
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label>Last name</label>
+																		<input class="form-control" type="text" formControlName = "last_name">
+																	</div>
+																</div>
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label>Email</label>
+																		<input class="form-control" type="email" formControlName = "email">
+																	</div>
+																</div>
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label>Phone</label>
+																		<input class="form-control" type="tel" formControlName = "phone">
+																	</div>
+																</div>
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label>Mobile phone</label>
+																		<input class="form-control" type="tel" formControlName = "mobile_phone">
+																	</div>
+																</div>
+															</div>
+															<h4 class="form-title">Invoicing Address</h4>
+															<div class="row">
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label>Address Line1</label>
+																		<input class="form-control" type="text" formControlName = "invoice_address_line1">
+																	</div>
+																</div>
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label>Address Line2</label>
+																		<input class="form-control" type="text" formControlName = "invoice_address_line2">
+																	</div>
+																</div>
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label>Postcode</label>
+																		<input class="form-control" type="text" formControlName = "invoice_postcode">
+																	</div>
+																</div>
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label>City</label>
+																		<input class="form-control" type="text" formControlName = "invoice_city">
+																	</div>
+																</div>
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label>Country</label>
+																		<select class="select" formControlName = "invoice_country">
+																			<option>Please Select</option>
+																			<option selected>India</option>
+																			<option>UK</option>
+																		</select>
+																	</div>
+																</div>
+															</div>
+															<h4 class="form-title">Invoicing Details</h4>
+															<div class="row">
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label>Invoicing Language</label>
+																		<select class="select" formControlName = "invoice_language">
+																			<option>Please Select</option>
+																			<option selected>English</option>
+																			<option>French</option>
+																		</select>
+																	</div>
+																</div>
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label>Payment terms</label>
+																		<select class="select" formControlName = "payment_terms">
+																			<option>Please Select</option>
+																			<option selected>30 Days</option>
+																			<option>20 Days</option>
+																		</select>
+																	</div>
+																</div>
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label>VAT</label>
+																		<select class="select" formControlName = "vat">
+																			<option>Please Select</option>
+																			<option selected>3.5%</option>
+																			<option>4.5%</option>
+																		</select>
+																	</div>
+																</div>
+															</div>
+														</form>	
+													</div>	
+													<div class="panel-footer text-right">
+														<a class="btn btn-default m-r-5" (click)="onCancel()" href="javascript:void(0);">Cancel</a>
+														<a class="btn btn-orange" (click)="onFormSubmit()" href="javascript:void(0);">Save</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>					
+					</div>					
+				</div>			
+			</div>
+        </div>
