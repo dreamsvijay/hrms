@@ -19,7 +19,7 @@ export class CustomerComponent implements OnInit {
 	
 	customers;
 	customerForm: FormGroup;
-	
+	notify = false;
 	constructor( private apiService: ApiService, private router: Router ) { }
 
 	ngOnInit() {
@@ -49,10 +49,10 @@ export class CustomerComponent implements OnInit {
 			'invoice_address_line2': new FormControl(),
 			'invoice_postcode': new FormControl(),
 			'invoice_city': new FormControl(),
-			'invoice_country': new FormControl(),
-			'invoice_language': new FormControl(),
-			'payment_terms': new FormControl(),
-			'vat': new FormControl()
+			//'invoice_country': new FormControl(),
+			//'invoice_language': new FormControl(),
+			//'payment_terms': new FormControl(),
+			//'vat': new FormControl()
 		});
     
 		this.getCustomers();
@@ -84,6 +84,7 @@ export class CustomerComponent implements OnInit {
 	      		this.router.navigate(['customer']);
 				this.getCustomers();
 				this.onCancel();
+				this.notify = true;
 	      	}
 	      	else {
 	      		this.router.navigate(['customer']);

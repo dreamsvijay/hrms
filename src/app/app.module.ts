@@ -31,6 +31,8 @@ import { CustomerComponent } from './customer/customer.component';
 import { SocialLoginModule, AuthServiceConfig } from "angular4-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angular4-social-login";
 
+import { AlertModule } from 'ngx-bootstrap';
+
 export const createTranslateLoader = (http: HttpClient) => {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 };
@@ -67,7 +69,8 @@ let config = new AuthServiceConfig([
         deps: [HttpClient]
       }
     }),
-    SocialLoginModule.initialize(config)
+    SocialLoginModule.initialize(config),
+    AlertModule.forRoot(),
   ],
   providers: [ApiService, AuthGuardService],
   bootstrap: [AppComponent]
