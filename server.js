@@ -58,6 +58,7 @@ usersSchema = new mongo.Schema({
     contact_numbers: Object,
     gender: String,
     type: String,
+    profile_type: String,
     password: String,
     profile_picture: String,
     is_active: Boolean,
@@ -87,14 +88,32 @@ userResource.route('signup', function(req, res, next){
 	status = false;
 	params = req.body;
 	
-	if ( params.email && params.password ) {
+	if ( params.email && ( params.password || params.profile_type ) ) {
 
 		  var userData = {
 		    first_name: params.name,
-		    email: params.email,
-		    password: params.password
+		    email: params.email
 		  }
-	
+	      
+		  if ( params.name ) {
+			  userData.first_name = params.name;
+		  }
+		  
+		  if ( params.first_name ) {
+			  userData.first_name = params.first_name;
+		  }
+		  if ( params.last_name ) {
+			  userData.last_name = params.last_name;
+		  }
+		  
+		  if( params.profile_type )  {
+			userData.profile_type = params.profile_type;
+			userData.password = "";
+		  }
+		  else {
+			  userData.password = params.password;
+		  }
+		  
 		  //use schema.create to insert data into the db
 		  status = user.create(userData, function(err, users) {
 		    if (!err) {
@@ -111,8 +130,8 @@ userResource.route('signup', function(req, res, next){
 userResource.route('login', function(req, res, next){
 	status = false;
 	params = req.body;
-
-	if ( params.email && params.password ) {
+	//TODO PASSWORD 
+	if ( params.email ) {
 	
 		  //use schema.create to insert data into the db
 		  user.findOne({email: params.email}, function(err, users) {
