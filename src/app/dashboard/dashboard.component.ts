@@ -17,13 +17,12 @@ export class DashboardComponent implements OnInit {
   userId;
   constructor( private apiService: ApiService, private router: Router ) { }
 
-  ngOnInit() {  
-  	this.loadScript('../../assets/js/jquery-3.2.1.min.js');
-	this.loadScript('../../assets/js/bootstrap.min.js');
-  	this.loadScript('../../assets/plugins/morris/morris.min.js');
-  	this.loadScript('../../assets/plugins/raphael/raphael-min.js');
-  	this.loadScript('../../assets/js/app.js');
-  	this.loadScript('../../assets/js/chart.js');
+  ngOnInit() {    	
+					this.loadScript('../../assets/js/app.js');
+					this.loadScript('../../assets/js/chart.js');
+					this.loadScript('../../assets/js/morris.min.js');
+					this.loadScript('../../assets/js/raphael-min.js');
+					this.loadScript('../../assets/js/app.js');					
   }
 
   onLogout = function() {

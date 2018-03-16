@@ -29,7 +29,7 @@ export class SignUpComponent implements OnInit {
     translate.setDefaultLang('en');    
    }
 
-  ngOnInit() {
+  ngOnInit() { // Initiating formgroup variables 
     this.signupForm = new FormGroup({
       'name': new FormControl(null,Validators.required),
       'email': new FormControl(null, [Validators.required, Validators.email]),      
@@ -40,6 +40,9 @@ export class SignUpComponent implements OnInit {
     
   }
 
+
+  // restrict names example function 
+
 forbiddenNames(control : FormControl):{[s:string]:boolean}{
     if (this.forbiddenUsernames.indexOf(control.value) !== -1){
       return { 'nameIsForbidden':true };
@@ -49,15 +52,16 @@ forbiddenNames(control : FormControl):{[s:string]:boolean}{
   }
 
   
+  // Signup form submit 
   onFormSubmit = function(signupForm){
-          this.apiService.signup(signupForm)
+          this.apiService.signup(signupForm) // sending data to apiservice 
       .subscribe(data => {
       	if( data ) {
           console.log(data);
-      		this.router.navigate(['log-in']);
+      		this.router.navigate(['log-in']); // navigating to login 
       	}
       	else {
-      		this.router.navigate(['sign-up']);
+          this.router.navigate(['sign-up']); // navigating to signup 
       	}
       }, error => this.errorMessage = error);
     return false;

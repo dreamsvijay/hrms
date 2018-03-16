@@ -23,6 +23,12 @@
         "styles.css"
       ],
       "scripts": [
+        "../src/assets/js/jquery-3.2.1.min.js",
+        "../src/assets/js/bootstrap.min.js",
+        "../src/assets/js/morris.min.js",
+        "../src/assets/js/raphael-min.js",
+        "../src/assets/js/app.js",
+        "../src/assets/js/chart.js"        	
 	  ],
       "environmentSource": "environments/environment.ts",
       "environments": {
