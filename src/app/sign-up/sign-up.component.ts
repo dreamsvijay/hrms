@@ -68,7 +68,8 @@ forbiddenNames(control : FormControl):{[s:string]:boolean}{
       .subscribe(data => {
       	if( data ) {
           console.log(data);
-      		this.router.navigate(['log-in']); // navigating to login 
+            var message = "<strong>Well done!</strong> You have successfully signed up.";
+      		this.router.navigate(['log-in'], message); // navigating to login 
       	}
       	else {
           this.router.navigate(['sign-up']); // navigating to signup 
