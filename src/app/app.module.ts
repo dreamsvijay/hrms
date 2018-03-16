@@ -32,6 +32,7 @@ import { SocialLoginModule, AuthServiceConfig } from "angular4-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angular4-social-login";
 
 import { AlertModule } from 'ngx-bootstrap';
+import { AlertNotificationComponent } from './alert-notification/alert-notification.component';
 
 export const createTranslateLoader = (http: HttpClient) => {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -54,7 +55,8 @@ let config = new AuthServiceConfig([
     SignUpComponent,
     LoginInComponent,
     DashboardComponent,
-    CustomerComponent    
+    CustomerComponent,
+    AlertNotificationComponent    
   ],
   imports: [
     AppRoutingModule,
