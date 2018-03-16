@@ -28,10 +28,23 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuardService } from './auth-guard.service';
 import { CustomerComponent } from './customer/customer.component';
 
+import { SocialLoginModule, AuthServiceConfig } from "angular4-social-login";
+import { GoogleLoginProvider, FacebookLoginProvider } from "angular4-social-login";
+
 export const createTranslateLoader = (http: HttpClient) => {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 };
 
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("24558093658-cv6h5l1ck00u25e4ug8blisjoooeoej7.apps.googleusercontent.com")
+  },
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider("555959064799267")
+  }
+]);
 
 @NgModule({
   declarations: [
@@ -53,7 +66,8 @@ export const createTranslateLoader = (http: HttpClient) => {
         useFactory: createTranslateLoader,
         deps: [HttpClient]
       }
-    })
+    }),
+    SocialLoginModule.initialize(config)
   ],
   providers: [ApiService, AuthGuardService],
   bootstrap: [AppComponent]
