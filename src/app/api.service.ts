@@ -38,7 +38,7 @@ export class ApiService {
 
 	isEmailIdAvailable(emailId):Observable<any> {
 	    return this.http.get(`${this.ApiServiceUrl}/users/check_email?email=${emailId}`).pipe(
-	      tap(_ => console.log(`Checking ${emailId} is available or not`)),
+	      //tap(_ => console.log(`Checking ${emailId} is available or not`)),
 	      catchError(this.handleError<any>('Checking ${emailId} is available or not failed'))
 	    );
 	}
