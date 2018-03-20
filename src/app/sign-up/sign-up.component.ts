@@ -84,12 +84,22 @@ export class SignUpComponent implements OnInit {
   isEmailUnique(control: FormControl) {
       const q = new Promise((resolve, reject) => {
       setTimeout(() => {
-        this.apiService.isEmailIdAvailable(control.value).subscribe(() => {
-          resolve(null);
-        }, () => { resolve({ 'isEmailUnique': true }); });
+        this.apiService.isEmailIdAvailable(control.value).subscribe((res) => { // Succcess response 
+
+          if(res){           
+            resolve({ 'isEmailUnique': true });
+          }else{           
+            resolve({ 'isEmailUnique': false });
+          }
+
+        }, () => {  // if error occurs 
+      
+      });
       }, 1000);
     });
-    return q;
+     console.log(q);
+     return q;
+     
   }
     
   /*
