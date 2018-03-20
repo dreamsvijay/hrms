@@ -1,37 +1,49 @@
+/* ######## Customer module component ######## */
+
+/* --------------------------- Predefined/third party modules --------------------------- starts */
+
 import { Component, OnInit } from '@angular/core';
-//Import the API for building a form
+
+/* Import forms module to use validation, controls etc. */
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ApiService } from '../api.service';
+
+/* Importing route module to use route */
 import { Router } from '@angular/router';
+
+/* --------------------------- Predefined/third party modules --------------------------- ends */
+
+/* --------------------------- Custom modules --------------------------- starts */
+
+import { ApiService } from '../api.service';
+
+/* --------------------------- Custom modules --------------------------- ends */
 
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',
   styleUrls: [
   				'./customer.component.css',
-  				// '../../assets/css/dataTables.bootstrap.min.css',
   				'../../assets/css/select2.min.css',
-  				// '../../assets/css/bootstrap-datetimepicker.min.css',
   				'../../assets/css/style.css'
   			]
 })
+
 export class CustomerComponent implements OnInit {
 	
-	customers;
-	customerForm: FormGroup;
-	notify = false;
+	customers; /* defiing private variable to hold customer list */
+	customerForm: FormGroup; /* defining customerForm as form group object */
+	notify = false; /* Set notify default flag status for notification alert */
+	
+	  /*
+	   * Injecting required services into contructor
+	   * ApiService | for making api service calls
+	   * Router | for route navigation
+	   * */
 	constructor( private apiService: ApiService, private router: Router ) { }
 
 	ngOnInit() {
-	   	// this.loadScript('../../assets/js/jquery-3.2.1.min.js');
-		// this.loadScript('../../assets/js/bootstrap.min.js');
-		// this.loadScript('../../assets/js/jquery.dataTables.min.js');
-		// this.loadScript('../../assets/js/dataTables.bootstrap.min.js');
-		// this.loadScript('../../assets/js/select2.min.js');
-		// this.loadScript('../../assets/js/moment.min.js');
-		// this.loadScript('../../assets/js/bootstrap-datetimepicker.min.js');
-	  	// this.loadScript('../../assets/js/app.js');
-	  	
+		
+		/* Initiating customerForm formgroup variables */ 
 		this.customerForm = new FormGroup({
 			'customer_number': new FormControl(),
 			'company_name': new FormControl(null, Validators.required),
@@ -53,55 +65,63 @@ export class CustomerComponent implements OnInit {
 			'vat': new FormControl()
 		});
     
+		/* Invokig get customers function to load customer list */
 		this.getCustomers();
   	}
  
+	/* Making service call to get customers */
 	getCustomers = function() {
-		this.apiService.getCustomers()
-	      .subscribe(data => {
+		this.apiService.getCustomers().subscribe(data => {
 	      	this.customers = data;	
 	      }, error => { console.log(error) });
 	}
 	
+	/* User logout */
+	/* TODO: have to make it as service call */
 	onLogout = function() {
-	      this.apiService.logout()
-	      .subscribe(data => {
+		/* Making service call to logout */
+	      this.apiService.logout().subscribe(data => {
 	      	if( data.id ) {
+	      		/* Removing JWT token & current userid from browser local storage */
 	        	localStorage.removeItem(data.id);
 	        	localStorage.removeItem("HRMS_current_user");
 	        }
+	      	/* Navigating to login page after logout */
 	        this.router.navigate(['']);
 	      }, error => { console.log(error) });
 	      return false;
  	}
 
+	  /*
+	   * Function for customer form submit
+	   * @param customerForm Object | customer information
+	   */
 	onFormSubmit = function(){
+		
+		/* Making service call to customer creation */
 	    this.apiService.createCustomer(this.customerForm.value)
 	      .subscribe(data => {
 	      	if( data ) {
+	      		/* Navigating to customer page after successful creation of customer */
 	      		this.router.navigate(['customer']);
+	      		
+	      		/* Update customer list to get immediate affect in user's view */
 				this.getCustomers();
+				
+				/* To reset form values */
 				this.onCancel();
-				this.notify = true;
-	      	}
+				
+				this.notify = true; /* To set notify flag to alert success message */	      	}
 	      	else {
+	      		/* Navigating to customer page after unsuccessful creation of customer */
 	      		this.router.navigate(['customer']);
 	      	}
 	      }, error => this.errorMessage = error);
 	    return false;
 	}
 	
+	/* To reset form values */
     onCancel = function() {
     	this.customerForm.reset();
     } 
-    
-	// public loadScript(url) {
-    //     let body = <HTMLDivElement> document.body;
-    //     let script = document.createElement('script');
-    //     script.innerHTML = '';
-    //     script.src = url;
-    //     script.async = true;
-    //     script.defer = true;
-    //     body.appendChild(script);
-    // }
 }

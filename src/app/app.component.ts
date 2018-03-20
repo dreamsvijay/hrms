@@ -1,7 +1,21 @@
+/* ######## Root module component ######## */
+
+/* --------------------------- Predefined/third party modules --------------------------- starts */
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+/* --------------------------- Predefined/third party modules --------------------------- ends */
+
+/* --------------------------- Custom modules --------------------------- starts */
+
+/* For making service calls */
 import { ApiService } from './api.service';
+
+/* For translation/locale implementation */
 import { TranslateService } from '@ngx-translate/core';
+
+/* --------------------------- Custom modules --------------------------- ends */
 
 
 @Component({
@@ -11,22 +25,18 @@ import { TranslateService } from '@ngx-translate/core';
 })
 
 export class AppComponent {
-  translate: TranslateService; // <-- defining translate as a private property
+  translate: TranslateService; /* defining translate as a private property  */
   
 
-  // Injecting Common service and translate service in constructor 
+  /* Injecting API service and translate service in constructor */
   constructor(private apiService: ApiService, translate: TranslateService ) { 
     this.translate = translate;
-    translate.setDefaultLang('en');
+    translate.setDefaultLang('en'); /* Setting default language */
   }
 
-  Repdata;
-  valbutton = "Save";
-  
-
-// Switching language 
-  switchLanguage = (lang: string) => {  // <-- creating a new method
-    this.translate.use(lang); // <-- invoking `use()`
+  /* Switching language */ 
+  switchLanguage = (lang: string) => {  /* creating a new method */
+    this.translate.use(lang); /* invoking `use()` to use the language */
   }
 
   ngOnInit() {}
