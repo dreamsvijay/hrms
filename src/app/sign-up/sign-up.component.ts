@@ -27,7 +27,6 @@ export class SignUpComponent implements OnInit {
   email : string;
   password : string;
   confirm_password : string;
-  forbiddenUsernames = ['Boomi', 'Nathan']; 
   fbLogin = false;
   googleLogin = false;
     
@@ -43,25 +42,28 @@ export class SignUpComponent implements OnInit {
   ngOnInit() { // Initiating formgroup variables 
     this.signupForm = new FormGroup({
       'name': new FormControl(null,Validators.required),
-      'email': new FormControl(null, [Validators.required, Validators.email]),      
-      'password': new FormControl(null, [Validators.required]),
-      'confirm_password': new FormControl(null,Validators.required)
-    });
+      'email': new FormControl(null, [ Validators.required, Validators.email ], this.isEmailUnique.bind(this)),      
+      'password': new FormControl(null, [ Validators.required ]),
+      'confirm_password': new FormControl(null, [ Validators.required ])
+    }, this.passwordMatchValidator);
     this.socialAuthentication();  
   }
 
-
-  // restrict names example function 
-
-forbiddenNames(control : FormControl):{[s:string]:boolean}{
-    if (this.forbiddenUsernames.indexOf(control.value) !== -1){
-      return { 'nameIsForbidden':true };
-    }else{
-      return { 'nameIsForbidden': false };
-    }
+  passwordMatchValidator(g: FormGroup) {
+	   return g.get('password').value === g.get('confirm_password').value? null : {'mismatch': true};
   }
 
-  
+  isEmailUnique(control: FormControl) {
+      const q = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        this.apiService.isEmailIdAvailable(control.value).subscribe(() => {
+          resolve(null);
+        }, () => { resolve({ 'isEmailUnique': true }); });
+      }, 1000);
+    });
+    return q;
+  }
+    
   // Signup form submit 
   onFormSubmit = function(signupForm){
           this.apiService.signup(signupForm) // sending data to apiservice 

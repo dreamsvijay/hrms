@@ -34,25 +34,23 @@ export class CustomerComponent implements OnInit {
 	  	
 		this.customerForm = new FormGroup({
 			'customer_number': new FormControl(),
-			// 'company_name': new FormControl(null, Validators.required),
-			'company_name': new FormControl(),
+			'company_name': new FormControl(null, Validators.required),
 			'company_number': new FormControl(),
 			'gst_number': new FormControl(), 
 			'title': new FormControl(),
 			'first_name': new FormControl(),
 			'last_name': new FormControl(),
-			// 'email': new FormControl(null, [Validators.required, Validators.email]), 
-			'email': new FormControl(), 
+			'email': new FormControl(null, [Validators.required, Validators.email]), 
 			'phone': new FormControl(),
 			'mobile_phone': new FormControl(),
 			'invoice_address_line1': new FormControl(),
 			'invoice_address_line2': new FormControl(),
 			'invoice_postcode': new FormControl(),
 			'invoice_city': new FormControl(),
-			//'invoice_country': new FormControl(),
-			//'invoice_language': new FormControl(),
-			//'payment_terms': new FormControl(),
-			//'vat': new FormControl()
+			'invoice_country': new FormControl(),
+			'invoice_language': new FormControl(),
+			'payment_terms': new FormControl(),
+			'vat': new FormControl()
 		});
     
 		this.getCustomers();

@@ -56,7 +56,7 @@ let config = new AuthServiceConfig([
     LoginInComponent,
     DashboardComponent,
     CustomerComponent,
-    AlertNotificationComponent    
+    AlertNotificationComponent
   ],
   imports: [
     AppRoutingModule,

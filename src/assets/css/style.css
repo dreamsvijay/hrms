@@ -492,3 +492,8 @@ div.form-control {border-color: transparent;padding: 6px 0;}
 .customer-info {
     padding: 15px;
 }
+
+/* Error Block */
+.help-block {
+	color: red;
+}

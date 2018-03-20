@@ -26,12 +26,15 @@
               <div class="form-group">                
                 <input class="form-control" type="text" formControlName = "name" placeholder="{{ 'name' | translate }}">
                 <span *ngIf="signupForm.get('name').hasError('required') && signupForm.get('name').touched" class="help-block">Enter name</span>
-                <!-- <span *ngIf="signupForm.get('name').errors['nameIsForbidden']" class="help-block">Enter valid name</span> -->
               </div>
               <div class="form-group">                
                 <input class="form-control" type="text" formControlName = "email" title="Please enter your email" placeholder="{{ 'email' | translate }}">                                
                 <span class="help-block" *ngIf="signupForm.get('email').hasError('required') && signupForm.get('email').touched && !signupForm.get('email').dirty">Enter email</span>
                 <span class="help-block" *ngIf="signupForm.get('email').hasError('email') && signupForm.get('email').dirty">Enter valid email</span>
+                <span *ngIf="!signupForm.get('email').hasError('required') && !signupForm.get('email').hasError('email') && signupForm.get('email').hasError('isEmailUnique') && signupForm.get('email').touched" class="help-block">Available</span>
+                 <span *ngIf="signupForm.get('email').dirty">
+			        <small class="error" *ngIf="signupForm.get('email').hasError('isEmailUnique')">This email has been registered already</small>
+			    </span>
               </div>
               <div class="form-group">                
                 <input class="form-control" type="password" formControlName = "password" title="Please enter your password" placeholder="{{ 'password' | translate }}">
@@ -39,7 +42,8 @@
               </div>
               <div class="form-group">                
                 <input class="form-control" type="password" formControlName = "confirm_password" title="Please re-enter your password" placeholder="{{ 'confirm password' | translate }}">
-                <span class="help-block" *ngIf="signupForm.get('confirm_password').hasError('required') && signupForm.get('confirm_password').touched">Enter confirm password</span>               
+                <span class="help-block" *ngIf="signupForm.get('confirm_password').hasError('required') && signupForm.get('confirm_password').touched">Enter confirm password</span>
+                <span class="help-block" *ngIf="signupForm?.errors?.mismatch && signupForm.get('confirm_password').touched && !signupForm.get('confirm_password').hasError('required')">Confirm password mismatch</span>               
               </div>              
               <div class="form-group">
                 <input class="form-control btn btn-orange" type="submit" value="{{ 'sign up' | translate }}" [disabled] = "!signupForm.valid">

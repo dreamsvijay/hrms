@@ -39,6 +39,8 @@ app.use(function (req, res, next) {
     }
 });
 
+app.disable('etag');
+
 var db = mongo.connect("mongodb://" + config.database.host + ":" + config.database.port + "/" + config.database.db, function (err, response) {
     if (err) { console.log(err); }
     else { console.log('Connected to ' + db, ' + ', response); }
@@ -150,6 +152,22 @@ userResource.route('login', function(req, res, next){
 	else {
 		res.send(status);
 	}
+});
+
+userResource.route('check_email', function(req, res, next) {
+	status = null;
+	params = req.query;
+	user.findOne({email: params.email}, function(err, user) {
+		if ( !err && (user!= null) ) {
+			status = {
+					"statusCode": 400,
+					"error": "Bad Request",
+					"message": "Email address already registerd"
+					};
+		}
+		res.send(status);
+	});
+	
 });
 
 userResource.route('logout', function(req, res, next) {
