@@ -23,6 +23,8 @@ import { SocialUser } from "angular4-social-login";
 
 /* --------------------------- Custom modules --------------------------- starts */
 
+import { EmailValidationDirective } from '../email-validation.directive';
+
 /* For making service calls */
 import { UserService } from '../services/api/user.service';
 
@@ -66,7 +68,7 @@ export class SignUpComponent implements OnInit {
 	  /* Initiating signup formgroup variables */ 
 	  this.signupForm = new FormGroup({
 	      'name': new FormControl(null,Validators.required),
-	      'email': new FormControl(null, [ Validators.required, Validators.email ], this.isEmailUnique.bind(this)),      
+	      'email': new FormControl(null, [ Validators.required, Validators.email ]),      
 	      'password': new FormControl(null, [ Validators.required ]),
 	      'confirm_password': new FormControl(null, [ Validators.required ])
 	  }, this.passwordMatchValidator);
@@ -80,27 +82,7 @@ export class SignUpComponent implements OnInit {
 	   return g.get('password').value === g.get('confirm_password').value? null : {'mismatch': true};
   }
   
-  /* Custom validaiton for checking email-id already registered */
-  isEmailUnique(control: FormControl) {
-      const q = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        this.userService.isEmailIdAvailable(control.value).subscribe((res) => { // Succcess response 
 
-          if(res){           
-            resolve({ 'isEmailUnique': true });
-          }else{           
-            resolve({ 'isEmailUnique': false });
-          }
-
-        }, () => {  // if error occurs 
-      
-      });
-      }, 1000);
-    });
-     console.log(q);
-     return q;
-     
-  }
     
   /*
    * Function for signup form submit

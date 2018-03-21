@@ -22,18 +22,22 @@
           </div>
           <div class="loginright">
             <h1>{{ "sign up to hrms" | translate }}</h1>
-            <form action="#" [formGroup]="signupForm"   (ngSubmit)="onFormSubmit(signupForm.value)"  title="Please enter your name">
+            <form action="#" [formGroup]="signupForm"   (ngSubmit)="onFormSubmit(signupForm.value)"  title="Please enter your name" >
               <div class="form-group">                
-                <input class="form-control" type="text" formControlName = "name" placeholder="{{ 'name' | translate }}">
+                <input class="form-control" type="text" formControlName = "name" placeholder="{{ 'name' | translate }}" >
                 <span *ngIf="signupForm.get('name').hasError('required') && signupForm.get('name').touched" class="help-block">Enter name</span>
               </div>
-              <div class="form-group">                
-                <input class="form-control" type="text" formControlName = "email" title="Please enter your email" placeholder="{{ 'email' | translate }}">                                
+              
+              <div class="form-group" >                
+                <input class="form-control" type="text" formControlName = "email" title="Please enter your email" placeholder="{{ 'email' | translate }}" appEmailValidation>                              
+                <span class="help-block" id="error"></span>
                 <span class="help-block" *ngIf="signupForm.get('email').hasError('required') && signupForm.get('email').touched && !signupForm.get('email').dirty">Enter email</span>
                 <span class="help-block" *ngIf="signupForm.get('email').hasError('email') && signupForm.get('email').dirty">Enter valid email</span>
                 <!-- <span *ngIf="signupForm.get('email').hasError('isEmailUnique') && signupForm.get('email').touched" class="help-block">Already exist</span> -->
                  <!-- <span *ngIf="signupForm.get('email').dirty"> -->
-			        <span class="help-block" *ngIf="signupForm.get('email').hasError('isEmailUnique')">This email has been registered already</span>                  
+                 
+              
+              
 			    <!-- </span> -->
               </div>
               <div class="form-group">                
