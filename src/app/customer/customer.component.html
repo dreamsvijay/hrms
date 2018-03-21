@@ -54,8 +54,8 @@
 															</div>
 														</div>
 													</div>
-													<alert type="success" [dismissOnTimeout]="5000" *ngIf="notify">
-												  		<strong>Well done!</strong> Your company has been successfully submitted.
+													<alert type="success" [dismissOnTimeout]="5000" *ngIf="notify.status">
+												  		<strong>Well done!</strong> {{notify.message}}
 													</alert>
 													<div class="table-responsive invoice-table search-sec">
 														<table class="table no-border">
@@ -71,7 +71,7 @@
 															<tbody>
 																<tr *ngFor="let customer of customers; let i = index">
 																	<td><label>{{i + 1}}</label></td>
-																	<td><label>{{customer.name}}</label></td>
+																	<td (click)="onSelect(customer)"><label>{{customer.name}}</label></td>
 																	<td><label>{{customer.email}}</label></td>
 																	<td class="text-right"><label>0.00</label></td>
 																</tr>
@@ -101,7 +101,7 @@
 							<div class="section-right">
 								<div class="display-table">
 									<div class="button-sec">
-										<a class="btn btn-orange">Add New Customer</a>
+										<a class="btn btn-orange" (click)="onCancel()" href="javascript:void(0);">Add New Customer</a>
 									</div>
 									<div class="table-row">
 										<div class="table-body">
@@ -109,7 +109,8 @@
 												<div class="contact-details">
 													<div class="contact-form">
 														<form action="#" [formGroup]="customerForm"   (ngSubmit)="onFormSubmit()">
-															<div class="row">
+															<input class="form-control" type="hidden" formControlName = "customer_number">
+															<!-- <div class="row">
 																<div class="col-md-6">
 																	<div class="form-group">
 																		<label>Customer number</label>
@@ -117,7 +118,7 @@
 																		
 																	</div>
 																</div>
-															</div>
+															</div> -->
 															<h4 class="form-title">Contact Details</h4>
 															<div class="row">
 																<div class="col-md-6">
@@ -204,7 +205,7 @@
 																		<input class="form-control" type="text" formControlName = "invoice_city">
 																	</div>
 																</div>
-																<div class="col-md-6">
+																<!-- <div class="col-md-6">
 																	<div class="form-group">
 																		<label>Country</label>
 																		<select class="select" formControlName = "invoice_country">
@@ -213,9 +214,9 @@
 																			<option>UK</option>
 																		</select>
 																	</div>
-																</div>
+																</div> -->
 															</div>
-															<h4 class="form-title">Invoicing Details</h4>
+															<!-- <h4 class="form-title">Invoicing Details</h4>
 															<div class="row">
 																<div class="col-md-6">
 																	<div class="form-group">
@@ -247,12 +248,12 @@
 																		</select>
 																	</div>
 																</div>
-															</div>
+															</div> -->
 														</form>	
 													</div>	
 													<div class="panel-footer text-right">
 														<a class="btn btn-default m-r-5" (click)="onCancel()" href="javascript:void(0);">Cancel</a>														
-														<a class="btn btn-orange m-r-5" (click)="onFormSubmit()" href="javascript:void(0);" >Save</a>																												
+														<a class="btn btn-orange m-r-5" (click)="onFormSubmit()" href="javascript:void(0);" >{{ isUpdate }}</a>																												
 													</div>
 												</div>
 											</div>
