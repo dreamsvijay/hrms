@@ -42,6 +42,9 @@ import { AlertModule } from 'ngx-bootstrap';
 
 /* --------------------------- Custom modules --------------------------- starts */
 
+
+import { EmailValidationDirective } from './email-validation.directive';
+
 /* Importing signup module */
 import { SignUpComponent } from './sign-up/sign-up.component';
 
@@ -91,7 +94,8 @@ let config = new AuthServiceConfig([
     LoginInComponent, /* Login module */
     DashboardComponent, /* Dashboard module */
     CustomerComponent, /* Customer module */
-    AlertNotificationComponent /* Common alert notification module */
+    AlertNotificationComponent, /* Common alert notification module */
+    EmailValidationDirective  /* Email validation dierctive  */
   ],
   imports: [
     AppRoutingModule, /* Route module for navigation */
