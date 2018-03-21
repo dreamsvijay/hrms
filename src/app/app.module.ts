@@ -34,7 +34,7 @@ import { AlertModule } from 'ngx-bootstrap';
 /* --------------------------- Custom modules --------------------------- starts */
 
 
-import { EmailValidationDirective } from './email-validation.directive';
+import { EmailValidationDirective } from './directives/email-validation.directive';
 
 /* Importing signup module */
 import { SignUpComponent } from './sign-up/sign-up.component';

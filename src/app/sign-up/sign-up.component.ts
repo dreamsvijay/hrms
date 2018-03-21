@@ -23,7 +23,7 @@ import { SocialUser } from "angular4-social-login";
 
 /* --------------------------- Custom modules --------------------------- starts */
 
-import { EmailValidationDirective } from '../email-validation.directive';
+import { EmailValidationDirective } from '../directives/email-validation.directive';
 
 /* For making service calls */
 import { UserService } from '../services/api/user.service';
