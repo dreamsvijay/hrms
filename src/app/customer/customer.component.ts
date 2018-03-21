@@ -14,7 +14,14 @@ import { Router } from '@angular/router';
 
 /* --------------------------- Custom modules --------------------------- starts */
 
-import { ApiService } from '../api.service';
+/* Include user service */
+import { UserService } from '../services/api/user.service';
+
+/* Include customer service */
+import { CustomerService } from '../services/api/customer.service';
+
+/* Importing auth service to get authentication information */
+import { AuthUserService } from '../services/authentication/auth.service';
 
 /* --------------------------- Custom modules --------------------------- ends */
 
@@ -36,10 +43,11 @@ export class CustomerComponent implements OnInit {
 	
 	  /*
 	   * Injecting required services into contructor
-	   * ApiService | for making api service calls
+	   * UserService | for making user api service calls
+	   * CustomerService | for making customer api service calls
 	   * Router | for route navigation
 	   * */
-	constructor( private apiService: ApiService, private router: Router ) { }
+	constructor( private authUserService: AuthUserService, private userService: UserService, private customerService: CustomerService, private router: Router ) { }
 
 	ngOnInit() {
 		
@@ -71,7 +79,7 @@ export class CustomerComponent implements OnInit {
  
 	/* Making service call to get customers */
 	getCustomers = function() {
-		this.apiService.getCustomers().subscribe(data => {
+		this.customerService.getCustomers().subscribe(data => {
 	      	this.customers = data;	
 	      }, error => { console.log(error) });
 	}
@@ -79,17 +87,10 @@ export class CustomerComponent implements OnInit {
 	/* User logout */
 	/* TODO: have to make it as service call */
 	onLogout = function() {
-		/* Making service call to logout */
-	      this.apiService.logout().subscribe(data => {
-	      	if( data.id ) {
-	      		/* Removing JWT token & current userid from browser local storage */
-	        	localStorage.removeItem(data.id);
-	        	localStorage.removeItem("HRMS_current_user");
-	        }
-	      	/* Navigating to login page after logout */
-	        this.router.navigate(['']);
-	      }, error => { console.log(error) });
-	      return false;
+      	/* User logout */
+        this.authUserService.postLogout();
+      	/* Navigating to login page after logout */
+        this.router.navigate(['']);
  	}
 
 	  /*
@@ -99,7 +100,7 @@ export class CustomerComponent implements OnInit {
 	onFormSubmit = function(){
 		
 		/* Making service call to customer creation */
-	    this.apiService.createCustomer(this.customerForm.value)
+	    this.customerService.createCustomer(this.customerForm.value)
 	      .subscribe(data => {
 	      	if( data ) {
 	      		/* Navigating to customer page after successful creation of customer */

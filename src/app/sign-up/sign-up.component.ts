@@ -24,7 +24,7 @@ import { SocialUser } from "angular4-social-login";
 /* --------------------------- Custom modules --------------------------- starts */
 
 /* For making service calls */
-import { ApiService } from '../api.service';
+import { UserService } from '../services/api/user.service';
 
 /* --------------------------- Custom modules --------------------------- ends */
 
@@ -52,12 +52,12 @@ export class SignUpComponent implements OnInit {
   
   /*
    * Injecting required services into contructor
-   * ApiService | for making api service calls
+   * UserService | for making user api service calls
    * TranslateService | for locale implementation
    * Router | for route navigation
    * AuthService | for authentication service
    * */
-  constructor( private apiService: ApiService, translate: TranslateService, private router: Router, private authService: AuthService ) {
+  constructor( private userService: UserService, translate: TranslateService, private router: Router, private authService: AuthService ) {
     this.translate = translate;
     translate.setDefaultLang('en'); /* Setting default language */    
    }
@@ -84,7 +84,7 @@ export class SignUpComponent implements OnInit {
   isEmailUnique(control: FormControl) {
       const q = new Promise((resolve, reject) => {
       setTimeout(() => {
-        this.apiService.isEmailIdAvailable(control.value).subscribe((res) => { // Succcess response 
+        this.userService.isEmailIdAvailable(control.value).subscribe((res) => { // Succcess response 
 
           if(res){           
             resolve({ 'isEmailUnique': true });
@@ -109,7 +109,7 @@ export class SignUpComponent implements OnInit {
   onFormSubmit = function(signupForm){
 	  
 	  /* Making service call to signup */
-      this.apiService.signup(signupForm).subscribe(data => {
+      this.userService.signup(signupForm).subscribe(data => {
 	      if( data ) {
 	    	  var message = "<strong>Well done!</strong> You have successfully signed up.";
 	    	  /* Navigating to login page after successful signup */

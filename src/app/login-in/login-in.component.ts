@@ -20,7 +20,10 @@ import { SocialUser } from "angular4-social-login";
 /* --------------------------- Custom modules --------------------------- starts */
 
 /* For making service calls */
-import { ApiService } from '../api.service';
+import { UserService } from '../services/api/user.service';
+
+/* Importing auth service to get authentication information */
+import { AuthUserService } from '../services/authentication/auth.service';
 
 /* --------------------------- Custom modules --------------------------- ends */
 
@@ -43,11 +46,12 @@ export class LoginInComponent implements OnInit {
 
   /*
    * Injecting required services into contructor
-   * ApiService | for making api service calls
+   * UserService | for making user api service calls
    * Router | for route navigation
    * AuthService | for authentication service
+   * AuthUserService | to get authentication info
    * */
-  constructor( private apiService: ApiService, private router: Router, private authService: AuthService ) { }
+  constructor( private userService: UserService, private router: Router, private authService: AuthService, private authUserService: AuthUserService ) { }
 
   ngOnInit() {
 	/* Initiating loginform formgroup variables */ 
@@ -108,13 +112,13 @@ export class LoginInComponent implements OnInit {
    */
   onFormSubmit = function(LoginForm) {
 	  /* Making service call to login */
-      this.apiService.login(LoginForm).subscribe(data => {
+      this.userService.login(LoginForm).subscribe(data => {
       	if( data ) {
 	      	var jwtToken = data.token; /* Setting JWT token to private variable */
 	      	var userId = data.id; /* Setting userId to private variable */
 	      	
-	      	localStorage.setItem( userId, jwtToken ); /* Setting JWT token for the respective user in browser local storage */
-	      	localStorage.setItem( "HRMS_current_user", userId ); /* Setting current user ID in browser local storage */
+	      	/* Post login setting customer information */
+	      	this.authUserService.postLogin( jwtToken, userId );
 	      	
 	      	/* Navigating to dashboard page after successful login */
 	        this.router.navigate(['home']);

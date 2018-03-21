@@ -9,9 +9,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 /* --------------------------- Custom modules --------------------------- starts */
 
-/* For making service calls */
-import { ApiService } from './api.service';
-
 /* For translation/locale implementation */
 import { TranslateService } from '@ngx-translate/core';
 
@@ -28,8 +25,8 @@ export class AppComponent {
   translate: TranslateService; /* defining translate as a private property  */
   
 
-  /* Injecting API service and translate service in constructor */
-  constructor(private apiService: ApiService, translate: TranslateService ) { 
+  /* Injecting translate service into constructor */
+  constructor(translate: TranslateService ) { 
     this.translate = translate;
     translate.setDefaultLang('en'); /* Setting default language */
   }

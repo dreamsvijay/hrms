@@ -12,9 +12,6 @@ import { FormsModule } from '@angular/forms';
 /* Importing root module */
 import { AppComponent } from './app.component';
 
-/* Importing API service */
-import { ApiService } from './api.service';
-
 /* For locale implementation */
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -24,12 +21,6 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 /* Importing reactive forms module to create reactive forms */
 import { ReactiveFormsModule } from '@angular/forms';
-
-/* Importing routing module for route navigation */
-import { AppRoutingModule } from './app-routing-module';
-
-/* Importing auth guard service for authentication and authorization */
-import { AuthGuardService } from './auth-guard.service';
 
 /* Importing social signup module for social login integration */
 import { SocialLoginModule, AuthServiceConfig } from "angular4-social-login";
@@ -56,6 +47,21 @@ import { CustomerComponent } from './customer/customer.component';
 
 /* Importing alert module for common notification alert to all modules */
 import { AlertNotificationComponent } from './alert-notification/alert-notification.component';
+
+/* Importing User API service */
+import { UserService } from './services/api/user.service';
+
+/* Importing Customer API service */
+import { CustomerService } from './services/api/customer.service';
+
+/* Importing routing module for route navigation */
+import { AppRoutingModule } from './app-routing-module';
+
+/* Importing auth guard service for authentication and authorization */
+import { AuthGuardService } from './services/authentication/auth-guard.service';
+
+/* Importing auth service to get authentication information */
+import { AuthUserService } from './services/authentication/auth.service';
 
 /* --------------------------- Custom modules --------------------------- ends */
 
@@ -113,8 +119,10 @@ let config = new AuthServiceConfig([
     SocialLoginModule.initialize(config), /* Initializing social logins */
     AlertModule.forRoot(), /* making alert modules available to all modules */
   ],
-  providers: [	ApiService, /* For accessing API service */
-  				AuthGuardService /* For authorization and authentication */
+  providers: [	UserService, /* For accessing User API services */
+              	CustomerService, /* For accessing Customer API services */
+  				AuthGuardService, /* For authorization and authentication */
+  				AuthUserService /* For getting authentication information */
   			],
   bootstrap: [AppComponent] /* Initializing root module */
 })

@@ -8,7 +8,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 /* For authentication and authorization */
-import { AuthGuardService } from './auth-guard.service';
+import { AuthGuardService } from './services/authentication/auth-guard.service';
 
 /* --------------------------- Predefined/third party modules --------------------------- ends */
 

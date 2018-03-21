@@ -12,7 +12,10 @@ import { Router } from '@angular/router';
 /* --------------------------- Custom modules --------------------------- starts */
 
 /* For making service calls */
-import { ApiService } from '../api.service';
+import { UserService } from '../services/api/user.service';
+
+/* For authentication information */
+import { AuthUserService } from '../services/authentication/auth.service';
 
 /* --------------------------- Custom modules --------------------------- ends */
 
@@ -31,10 +34,10 @@ export class DashboardComponent implements OnInit {
 
   /*
    * Injecting required services into contructor
-   * ApiService | for making api service calls
+   * UserService | for making user api service calls
    * Router | for route navigation
    * */
-  constructor( private apiService: ApiService, private router: Router ) { }
+  constructor( private authUserService: AuthUserService, private userService: UserService, private router: Router ) { }
 
   ngOnInit() {
 	/* Loading script files at run time */
@@ -45,20 +48,14 @@ export class DashboardComponent implements OnInit {
 	this.loadScript('../../assets/js/app.js');					
   }
 
-  /* User logout */
-  onLogout = function() {
-	  /* Making service call to logout */
-      this.apiService.logout().subscribe(data => {
-      	if( data.id ) {
-      		/* Removing JWT token & current userid from browser local storage */
-        	localStorage.removeItem(data.id);
-        	localStorage.removeItem("HRMS_current_user");
-        }
-      	/* Navigating to login page after logout */
-        this.router.navigate(['']);
-      }, error => this.errorMessage = error);
-    return false;
-  }
+	/* User logout */
+	/* TODO: have to make it as service call */
+	onLogout = function() {
+    	/* User logout */
+      this.authUserService.postLogout();
+    	/* Navigating to login page after logout */
+      this.router.navigate(['']);
+	}
   
   /**
    * Loading scripts at run time functionality

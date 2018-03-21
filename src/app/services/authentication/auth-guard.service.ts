@@ -9,15 +9,16 @@ import { CanActivate, CanActivateChild, Router, ActivatedRouteSnapshot, RouterSt
 
 /* --------------------------- Custom modules --------------------------- starts */
 
-/* Importing API service for making service calls */
-import { ApiService } from './api.service';
-
 /* --------------------------- Custom modules --------------------------- ends */
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
 
- 	constructor(private apiService: ApiService, private router: Router) { }
+	/* 
+	 * Injecting Services
+	 * Router | for navigation
+	 * */
+ 	constructor(private router: Router) { }
 
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 		let url: string = state.url;

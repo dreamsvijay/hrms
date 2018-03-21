@@ -1,4 +1,4 @@
-/* ######## API Service ######## */
+/* ######## User API Service ######## */
 
 /* --------------------------- Predefined/third party modules --------------------------- starts */
 
@@ -16,11 +16,15 @@ import { catchError, map, tap } from 'rxjs/operators';
 /* --------------------------- Predefined/third party modules --------------------------- ends */
 
 @Injectable()
-export class ApiService {
+export class UserService {
 
   /* API base service url */
   private ApiServiceUrl = 'http://localhost:8080';
 
+  /**
+   * Injecting Services into constructor
+   * HttpClient | for making service calls
+   */
   constructor(private http: HttpClient) { }
 
     /** 
@@ -42,21 +46,6 @@ export class ApiService {
 	    );
 	 }
 
-	/* User logout service call */
-	logout(): Observable<any> {
-	    /* Getting current user from local storage */
-	    /* TODO: have to make it as service call */
-	    var userId = localStorage.getItem("HRMS_current_user");
-	
-	    /* Getting current user JWT token from local storage */
-	    /* TODO: have to make it as service call */    
-	    var token = localStorage.getItem(userId);
-	    return this.http.get('http://localhost:8080/users/logout', { params: { token: token, userId: userId} }).pipe(
-	      tap(_ => console.log(`${userId} logged out successfully`)),
-	      catchError(this.handleError<any>('User Logout Error'))
-	    );
-	}
-
 	/** 
 	  * Check user email-id available or not service call
 	  * @param emailId String | user email-id 
@@ -65,45 +54,6 @@ export class ApiService {
 		    return this.http.get(`${this.ApiServiceUrl}/users/check_email?email=${emailId}`).pipe(
 		      catchError(this.handleError<any>('Checking ${emailId} is available or not failed'))
 		    );
-	}
-	
-    /** 
-     * Creating customer service call
-     * @param customer Object | customer information
-     */
-	createCustomer(customer): Observable<any> {
-			var customerParams = {
-				name: customer.company_name,
-				title: customer.title,
-			    company_no: customer.company_number,
-				gst_no: customer.gst_number,
-			    email: customer.email,
-			    addresses: {
-			    			invoice_address: {
-			    				address_line_1: customer.invoice_address_line1,
-			    				address_line_2: customer.invoice_address_line2,
-			    				postcode: customer.invoice_postcode,
-			    				city: customer.invoice_city,
-			    				country: customer.invoice_country
-			    			}
-			    },
-			    contact_numbers: {
-			    	phone: customer.phone, 
-			    	mobile_number: customer.mobile_phone
-			    }
-			};
-		    return this.http.post('http://localhost:8080/customers', customerParams).pipe(
-		      tap(_ => console.log(`${customer.email} created successfully`)),
-		      catchError(this.handleError<any>('Customer Creation Error'))
-		    );
-	}
-
-	/* Get customers list service call */
-	getCustomers(): Observable<any> {
-	    return this.http.get(`${this.ApiServiceUrl}/customers?sort=-createdAt`).pipe(
-	      tap(_ => console.log(`Fetched customers successfully`)),
-	      catchError(this.handleError<any>('Customers Fetch Error'))
-	    );
 	}
     
     /* Service call log */
