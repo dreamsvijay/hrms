@@ -30,6 +30,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 /* Importing customer module */
 import { CustomerComponent } from './customer/customer.component';
 
+/* Importing invoice module */
+import { InvoiceComponent } from './invoice/invoice.component';
+
 /* --------------------------- Custom modules --------------------------- ends */
 
 /* Initializing route constant */
@@ -38,7 +41,8 @@ const routes: Routes = [
     { path: 'sign-up', component: SignUpComponent }, /* Signup page */
     { path: 'log-in', component: LoginInComponent }, /* Login page */
     { path: 'home', canActivate: [ AuthGuardService ], component: DashboardComponent }, /* Dashboard page */
-    { path: 'customer', canActivate: [ AuthGuardService ], component: CustomerComponent } /* Customer page */  
+    { path: 'customer', canActivate: [ AuthGuardService ], component: CustomerComponent }, /* Customer page */
+    { path: 'invoice', canActivate: [ AuthGuardService ], component: InvoiceComponent } /* Invoice page */
 ];
 
 @NgModule({

@@ -31,8 +31,7 @@ import { AuthUserService } from '../services/authentication/auth.service';
   selector: 'app-login-in',
   templateUrl: './login-in.component.html',
   styleUrls: [
-    './login-in.component.css',
-    '../../assets/css/style.css'
+    './login-in.component.css'
   ]
 })
 

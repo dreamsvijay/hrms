@@ -19,16 +19,17 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-		"../node_modules/bootstrap/dist/css/bootstrap.min.css",
+		"../src/assets/css/bootstrap.min.css",
+		"../src/assets/css/font-awesome.min.css",
+		"../src/assets/css/select2.min.css",
+		"../src/assets/css/style.css",
         "styles.css"
       ],
       "scripts": [
         "../src/assets/js/jquery-3.2.1.min.js",
         "../src/assets/js/bootstrap.min.js",
-        "../src/assets/js/morris.min.js",
-        "../src/assets/js/raphael-min.js",
-        "../src/assets/js/app.js",
-        "../src/assets/js/chart.js"        	
+		"../src/assets/js/select2.min.js",
+        "../src/assets/js/app.js"    	
 	  ],
       "environmentSource": "environments/environment.ts",
       "environments": {

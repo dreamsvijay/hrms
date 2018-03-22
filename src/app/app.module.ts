@@ -65,6 +65,7 @@ import { AuthGuardService } from './services/authentication/auth-guard.service';
 
 /* Importing auth service to get authentication information */
 import { AuthUserService } from './services/authentication/auth.service';
+import { InvoiceComponent } from './invoice/invoice.component';
 
 /* --------------------------- Custom modules --------------------------- ends */
 
@@ -101,7 +102,7 @@ let config = new AuthServiceConfig([
     DashboardComponent, /* Dashboard module */
     CustomerComponent, /* Customer module */
     AlertNotificationComponent, /* Common alert notification module */
-    EmailValidationDirective,  /* Email validation directive  */
+    EmailValidationDirective, InvoiceComponent,  /* Email validation directive  */
   ],
   imports: [
     AppRoutingModule, /* Route module for navigation */

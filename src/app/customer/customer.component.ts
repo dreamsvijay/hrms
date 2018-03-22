@@ -35,9 +35,7 @@ import { Customer } from '../models/customer';
   selector: 'app-customer',
   templateUrl: './customer.component.html',
   styleUrls: [
-  				'./customer.component.css',
-  				'../../assets/css/select2.min.css',
-  				'../../assets/css/style.css'
+  				'./customer.component.css'
   			]
 })
 
@@ -58,12 +56,8 @@ export class CustomerComponent implements OnInit {
 	   * */
 	constructor( private authUserService: AuthUserService, private userService: UserService, private customerService: CustomerService, private router: Router ) { }
 
-	ngOnInit() {
+	ngOnInit() {			
 
-					
-
-
-		
 		/* Initiating customerForm formgroup variables */ 
 		this.customerForm = new FormGroup({
 			'customer_number': new FormControl(),
@@ -88,10 +82,6 @@ export class CustomerComponent implements OnInit {
     
 		/* Invokig get customers function to load customer list */
 		this.getCustomers();
-		this.loadScript('../../assets/js/jquery-3.2.1.min.js');	
-		this.loadScript('../../assets/js/bootstrap.min.js');	
-		this.loadScript('../../assets/js/select2.min.js');	
-		this.loadScript('../../assets/js/app.js');	
 		
   	}
  

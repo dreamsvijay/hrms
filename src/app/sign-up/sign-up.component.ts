@@ -34,8 +34,7 @@ import { UserService } from '../services/api/user.service';
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: [
-    './sign-up.component.css',
-    '../../assets/css/style.css'
+    './sign-up.component.css'
   ]
 })
 export class SignUpComponent implements OnInit {

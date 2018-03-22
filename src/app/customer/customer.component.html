@@ -1,11 +1,3 @@
-<style>
-    .main-wrapper{
-        font-size: 12px !important;
-	}
-	
-
-</style>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css">			
 		<div class="main-wrapper">
             <div class="header">
                 <div class="header-left">
@@ -23,7 +15,7 @@
 						<a href="profile.html" class="dropdown-toggle user-link" data-toggle="dropdown" title="Ryan Taylor">
 							<span class="user-img"><img class="img-circle" src="assets/img/user.jpg" width="31" alt="Ryan Taylor"></span>
 							<span>Ryan Taylor</span>
-							<!-- <i class="caret"></i> -->
+							<i class="caret"></i>
 						</a>
 						<ul class="dropdown-menu">
 							<li><a href="javascript:void(0);" (click)="onLogout()">Logout</a></li>
@@ -57,7 +49,7 @@
 													<alert type="success" [dismissOnTimeout]="5000" *ngIf="notify.status">
 												  		<strong>Well done!</strong> {{notify.message}}
 													</alert>
-													<div class="table-responsive invoice-table search-sec">
+													<div class="table-responsive invoice-table">
 														<table class="table no-border">
 															<!-- <table class="table table-striped no-border datatable"></table> -->
 															<thead>

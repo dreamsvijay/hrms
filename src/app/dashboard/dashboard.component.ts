@@ -24,9 +24,7 @@ import { AuthUserService } from '../services/authentication/auth.service';
   templateUrl: './dashboard.component.html',
   styleUrls: [
   				'./dashboard.component.css',
-  			 	'../../assets/fonts/font-awesome.min.css',
-  			 	'../../assets/plugins/morris/morris.css', 
-  			 	'../../assets/css/style.css',
+  			 	'../../assets/plugins/morris/morris.css'
   			 ]
 })
 
@@ -41,11 +39,9 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
 	/* Loading script files at run time */
-	this.loadScript('../../assets/js/app.js');
-	this.loadScript('../../assets/js/chart.js');
 	this.loadScript('../../assets/js/morris.min.js');
 	this.loadScript('../../assets/js/raphael-min.js');
-	this.loadScript('../../assets/js/app.js');					
+	this.loadScript('../../assets/js/chart.js');
   }
 
 	/* User logout */
