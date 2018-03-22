@@ -61,7 +61,7 @@ export class CustomerService {
 		/* Get customers list service call */
 		getCustomers(): Observable<any> {
 		    return this.http.get(`${this.ApiServiceUrl}/customers?sort=-createdAt`).pipe(
-		      tap(_ => console.log(`Fetched customers successfully`)),
+		      //tap(_ => console.log(`Fetched customers successfully`)),
 		      catchError(this.handleError<any>('Customers Fetch Error'))
 		    );
 		}

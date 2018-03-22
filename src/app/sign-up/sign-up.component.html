@@ -41,7 +41,7 @@
 			    <!-- </span> -->
               </div>
               <div class="form-group">                
-                <input class="form-control" type="password" formControlName = "password" title="Please enter your password" placeholder="{{ 'password' | translate }}">
+                <input class="form-control"  type="password" formControlName = "password" title="Please enter your password" placeholder="{{ 'password' | translate }}">
                 <span class="help-block" *ngIf="signupForm.get('password').hasError('required') && signupForm.get('password').touched">Enter password</span>
               </div>
               <div class="form-group">                

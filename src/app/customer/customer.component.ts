@@ -50,6 +50,10 @@ export class CustomerComponent implements OnInit {
 	constructor( private authUserService: AuthUserService, private userService: UserService, private customerService: CustomerService, private router: Router ) { }
 
 	ngOnInit() {
+
+					
+
+
 		
 		/* Initiating customerForm formgroup variables */ 
 		this.customerForm = new FormGroup({
@@ -75,6 +79,11 @@ export class CustomerComponent implements OnInit {
     
 		/* Invokig get customers function to load customer list */
 		this.getCustomers();
+		this.loadScript('../../assets/js/jquery-3.2.1.min.js');	
+		this.loadScript('../../assets/js/bootstrap.min.js');	
+		this.loadScript('../../assets/js/select2.min.js');	
+		this.loadScript('../../assets/js/app.js');	
+		
   	}
  
 	/* Making service call to get customers */
@@ -124,5 +133,20 @@ export class CustomerComponent implements OnInit {
 	/* To reset form values */
     onCancel = function() {
     	this.customerForm.reset();
-    } 
+	} 
+	
+	/**
+  * Loading scripts at run time functionality
+  * @param url String | script path to load at runtime
+  */
+	public loadScript(url) {
+		let body = <HTMLDivElement>document.body;
+		let script = document.createElement('script');
+		script.innerHTML = '';
+		script.src = url;
+		script.async = true;
+		script.defer = true;
+		body.appendChild(script);
+	}
+	
 }
