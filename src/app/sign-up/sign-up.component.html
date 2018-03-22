@@ -23,12 +23,12 @@
           <div class="loginright">
             <h1>{{ "sign up to hrms" | translate }}</h1>
             <form action="#" [formGroup]="signupForm"   (ngSubmit)="onFormSubmit(signupForm.value)"  title="Please enter your name" >
-              <div class="form-group">                
+              <div class="form-group" [ngClass]="{'has-error': signupForm.controls['name'].invalid && signupForm.controls['name'].touched }">                
                 <input class="form-control" type="text" formControlName = "name" placeholder="{{ 'name' | translate }}" >
                 <span *ngIf="signupForm.get('name').hasError('required') && signupForm.get('name').touched" class="help-block">Enter name</span>
               </div>
               
-              <div class="form-group" >                
+              <div class="form-group" [ngClass]="{'has-error': signupForm.controls['email'].invalid && signupForm.controls['email'].touched }">                
                 <input class="form-control" type="text" formControlName = "email" title="Please enter your email" placeholder="{{ 'email' | translate }}" appEmailValidation>                              
                 <span class="help-block" id="error"></span>
                 <span class="help-block" *ngIf="signupForm.get('email').hasError('required') && signupForm.get('email').touched && !signupForm.get('email').dirty">Enter email</span>
@@ -40,11 +40,11 @@
               
 			    <!-- </span> -->
               </div>
-              <div class="form-group">                
+              <div class="form-group" [ngClass]="{'has-error': signupForm.controls['password'].invalid && signupForm.controls['password'].touched }">                
                 <input class="form-control"  type="password" formControlName = "password" title="Please enter your password" placeholder="{{ 'password' | translate }}">
                 <span class="help-block" *ngIf="signupForm.get('password').hasError('required') && signupForm.get('password').touched">Enter password</span>
               </div>
-              <div class="form-group">                
+              <div class="form-group" [ngClass]="{'has-error': signupForm.controls['confirm_password'].invalid && signupForm.controls['confirm_password'].touched || signupForm?.errors?.mismatch }">                
                 <input class="form-control" type="password" formControlName = "confirm_password" title="Please re-enter your password" placeholder="{{ 'confirm password' | translate }}">
                 <span class="help-block" *ngIf="signupForm.get('confirm_password').hasError('required') && signupForm.get('confirm_password').touched">Enter confirm password</span>
                 <span class="help-block" *ngIf="signupForm?.errors?.mismatch && signupForm.get('confirm_password').touched && !signupForm.get('confirm_password').hasError('required')">Confirm password mismatch</span>               

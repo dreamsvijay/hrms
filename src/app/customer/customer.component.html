@@ -110,30 +110,25 @@
 													<div class="contact-form">
 														<form action="#" [formGroup]="customerForm"   (ngSubmit)="onFormSubmit()">
 															<input class="form-control" type="hidden" formControlName = "customer_number">
-															<!-- <div class="row">
-																<div class="col-md-6">
-																	<div class="form-group">
-																		<label>Customer number</label>
-																		<input class="form-control" type="text" formControlName = "customer_number">
-																		
-																	</div>
-																</div>
-															</div> -->
 															<h4 class="form-title">Contact Details</h4>
 															<div class="row">
 																<div class="col-md-6">
-																	<div class="form-group">
+																	<div class="form-group" [ngClass]="{'has-error': customerForm.controls['company_name'].invalid  && customerForm.controls['company_name'].touched }">
 																		<label>Company name</label>
-																		<input class="form-control" type="text" formControlName = "company_name">
-																		<!-- <span *ngIf="customerForm.get('company_name').hasError('required') && customerForm.get('company_name').touched" class="help-block">Enter company name</span> -->
+																		<input class="form-control" type="text" formControlName = "company_name">																		
+																		<span class="help-block" *ngIf="customerForm.controls.company_name.errors?.required 
+																			   && customerForm.get('company_name').touched">Enter company name</span>
 																	</div>
 																</div>
 																<div class="col-md-6">
-																	<div class="form-group">
-																		<label>Company number</label>
-																		<input class="form-control" type="text" placeholder="Eg. 0125478963" formControlName = "company_number">
+																	<div class="form-group" [ngClass]="{'has-error': customerForm.controls['company_number'].invalid && customerForm.controls['company_number'].touched }">
+																		<label>Company Number</label>
+																		<input class="form-control" type="company_number" formControlName="company_number">
+																		<span class="help-block" *ngIf="customerForm.controls.company_number.errors?.number">Enter valid company number</span>
 																	</div>
 																</div>
+
+
 																<div class="col-md-6">
 																	<div class="form-group">
 																		<label>GST number</label>
@@ -159,23 +154,30 @@
 																	</div>
 																</div>
 																<div class="col-md-6">
-																	<div class="form-group">
+																	<div class="form-group" [ngClass]="{'has-error': 
+																	customerForm.controls['email'].invalid 
+																	&& customerForm.controls['email'].touched }">
 																		<label>Email</label>
 																		<input class="form-control" type="email" formControlName = "email">
-																			<!-- <span class="help-block" *ngIf="customerForm.get('email').hasError('required') && customerForm.get('email').touched && !customerForm.get('email').dirty">Enter email</span>
-																			<span class="help-block" *ngIf="customerForm.get('email').hasError('email') && customerForm.get('email').dirty">Enter valid email</span> -->
+																		<span class="help-block" *ngIf="
+																		customerForm.controls.email.errors?.email
+																		&&  customerForm.get('email').touched 
+																		||  customerForm.get('email').invalid
+																		">Enter valid mail</span>																		
 																	</div>
 																</div>
 																<div class="col-md-6">
-																	<div class="form-group">
+																	<div class="form-group" [ngClass]="{'has-error': customerForm.controls['phone'].invalid && customerForm.controls['phone'].touched }">
 																		<label>Phone</label>
 																		<input class="form-control" type="tel" formControlName = "phone">
+																		<span class="help-block" *ngIf="customerForm.controls.phone.errors?.number">Enter valid phone</span>
 																	</div>
 																</div>
 																<div class="col-md-6">
-																	<div class="form-group">
+																	<div class="form-group" [ngClass]="{'has-error': customerForm.controls['mobile_phone'].invalid && customerForm.controls['mobile_phone'].dirty && customerForm.controls['mobile_phone'].touched }">
 																		<label>Mobile phone</label>
 																		<input class="form-control" type="tel" formControlName = "mobile_phone">
+																		<span class="help-block" *ngIf="customerForm.controls.mobile_phone.errors?.number && customerForm.get('mobile_phone').dirty && customerForm.get('mobile_phone').touched">Enter valid mobile number</span>
 																	</div>
 																</div>
 															</div>
@@ -209,7 +211,7 @@
 																	<div class="form-group">
 																		<label>Country</label>
 																		<select class="select" formControlName = "invoice_country">
-																			<option>Please Select</option>
+																			<option value="" selected="selected">Please Select</option>
 																			<option selected>India</option>
 																			<option>UK</option>
 																		</select>
@@ -222,9 +224,9 @@
 																	<div class="form-group">
 																		<label>Invoicing Language</label>
 																		<select class="select" formControlName = "invoice_language">
-																			<option>Please Select</option>
-																			<option selected>English</option>
-																			<option>French</option>
+																			<option value="" selected="selected">Please Select</option>
+																			<option  value="English">English</option>
+																			<option value="French">French</option>
 																		</select>
 																	</div>
 																</div>
@@ -232,9 +234,9 @@
 																	<div class="form-group">
 																		<label>Payment terms</label>
 																		<select class="select" formControlName = "payment_terms">
-																			<option>Please Select</option>
-																			<option selected>30 Days</option>
-																			<option>20 Days</option>
+																			<option value="" selected="selected">Please Select</option>
+																			<option value="30 Days">30 Days</option>
+																			<option value="20 Days">20 Days</option>
 																		</select>
 																	</div>
 																</div>
@@ -243,8 +245,8 @@
 																		<label>VAT</label>
 																		<select class="select" formControlName = "vat">
 																			<option>Please Select</option>
-																			<option selected>3.5%</option>
-																			<option>4.5%</option>
+																			<option value="3.5%">3.5%</option>
+																			<option value="4.5%">4.5%</option>
 																		</select>
 																	</div>
 																</div>
@@ -253,7 +255,7 @@
 													</div>	
 													<div class="panel-footer text-right">
 														<a class="btn btn-default m-r-5" (click)="onCancel()" href="javascript:void(0);">Cancel</a>														
-														<button  class="btn btn-orange m-r-5" (click)="onFormSubmit()" [disabled] = "!customerForm.valid">{{ isUpdate }}</button>																												
+														<button  class="btn btn-orange m-r-5" (click)="onFormSubmit()" [disabled] = "customerForm.invalid">{{ isUpdate }}</button>																												
 													</div>
 												</div>
 											</div>

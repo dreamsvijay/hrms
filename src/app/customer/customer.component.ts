@@ -7,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
 /* Import forms module to use validation, controls etc. */
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+/* Import Custom forms module to use validator  */
+import { CustomValidators } from 'ng4-validators';
+
 /* Importing route module to use route */
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'; 
 
 /* --------------------------- Predefined/third party modules --------------------------- ends */
 
@@ -63,15 +66,15 @@ export class CustomerComponent implements OnInit {
 		/* Initiating customerForm formgroup variables */ 
 		this.customerForm = new FormGroup({
 			'customer_number': new FormControl(),
-			'company_name': new FormControl(null, Validators.required),
-			'company_number': new FormControl(),
+			'company_name': new FormControl('', Validators.required),
+			'company_number': new FormControl('',CustomValidators.number),
 			'gst_number': new FormControl(), 
 			'title': new FormControl(),
 			'first_name': new FormControl(),
 			'last_name': new FormControl(),
-			'email': new FormControl(null, [Validators.required, Validators.email]), 
-			'phone': new FormControl(),
-			'mobile_phone': new FormControl(),
+			'email': new FormControl('',CustomValidators.email), 
+			'phone': new FormControl('', CustomValidators.number),
+			'mobile_phone': new FormControl('', CustomValidators.number),
 			'invoice_address_line1': new FormControl(),
 			'invoice_address_line2': new FormControl(),
 			'invoice_postcode': new FormControl(),
