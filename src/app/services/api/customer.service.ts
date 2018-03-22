@@ -15,6 +15,13 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 /* --------------------------- Predefined/third party modules --------------------------- ends */
 
+/* --------------------------- Custom modules --------------------------- starts */
+
+/* Importing auth service to get authentication information */
+import { AuthUserService } from '../authentication/auth.service';
+
+/* --------------------------- Custom modules --------------------------- ends */
+
 @Injectable()
 export class CustomerService {
 
@@ -24,8 +31,9 @@ export class CustomerService {
 	  /**
 	   * Injecting Services into constructor
 	   * HttpClient | for making service calls
+	   * AuthUserService | to get authentication information
 	   */
-	  constructor(private http: HttpClient) { }
+	  constructor( private http: HttpClient, private authUserService: AuthUserService ) { }
 		
 	    /** 
 	     * Creating customer service call
@@ -52,7 +60,9 @@ export class CustomerService {
 				    contact_numbers: {
 				    	phone: customer.phone, 
 				    	mobile_number: customer.mobile_phone
-				    }
+				    },
+				    deleted_on: null,
+				    created_by: this.authUserService.getUserId()
 				};
 			    return this.http.post('http://localhost:8080/customers', customerParams).pipe(
 			      tap(_ => console.log(`${customer.email} created successfully`)),
@@ -85,18 +95,35 @@ export class CustomerService {
 				    contact_numbers: {
 				    	phone: customer.phone, 
 				    	mobile_number: customer.mobile_phone
-				    }
+				    },
+				    updated_by: this.authUserService.getUserId(),
 				};
 			    return this.http.put('http://localhost:8080/customers/' + customer.customer_number, customerParams).pipe(
 			      tap(_ => console.log(`${customer.email} updated successfully`)),
 			      catchError(this.handleError<any>('Customer Updation Error'))
 			    );
 		}
+
+	    /** 
+	     * Delete customer service call
+	     * @param customer Object | customer information
+	     */
+		deleteCustomer(customer): Observable<any> {
+				var customerParams = {
+				    deleted_by: this.authUserService.getUserId(),
+				    deleted_on: Date.now()
+				};
+			    return this.http.put('http://localhost:8080/customers/' + customer.customer_number, customerParams).pipe(
+			      tap(_ => console.log(`${customer.email} deleted successfully`)),
+			      catchError(this.handleError<any>('Customer Deleted Error'))
+			    );
+		}
 		
 		/* Get customers list service call */
 		getCustomers(): Observable<any> {
-		    return this.http.get(`${this.ApiServiceUrl}/customers?sort=-createdAt`).pipe(
-		      //tap(_ => console.log(`Fetched customers successfully`)),
+			//&sort=-createdAt
+		    return this.http.get(`${this.ApiServiceUrl}/customers?deleted_on&sort=-createdAt`).pipe(
+		      tap(_ => console.log(`Fetched customers successfully`)),
 		      catchError(this.handleError<any>('Customers Fetch Error'))
 		    );
 		}
