@@ -71,7 +71,7 @@
 															<tbody>
 																<tr *ngFor="let customer of customers; let i = index">
 																	<td><label>{{i + 1}}</label></td>
-																	<td (click)="onSelect(customer)"><label>{{customer.name}}</label></td>
+																	<td><label><a href="javascript:void(0);" (click)="onSelect(customer)">{{customer.name}}</a></label></td>
 																	<td><label>{{customer.email}}</label></td>
 																	<td class="text-right"><label>0.00</label></td>
 																</tr>
@@ -250,9 +250,10 @@
 																</div>
 															</div>
 														</form>	
-													</div>	
+													</div>
 													<div class="panel-footer text-right">
-														<a class="btn btn-default m-r-5" (click)="onCancel()" href="javascript:void(0);">Cancel</a>														
+														<a class="btn btn-default m-r-5" (click)="onCancel()" href="javascript:void(0);">Cancel</a>
+														<button  class="btn btn-danger m-r-5" (click)="onDelete()" *ngIf="customerForm.value.customer_number">Delete</button>														
 														<button  class="btn btn-orange m-r-5" (click)="onFormSubmit()" [disabled] = "!customerForm.valid">{{ isUpdate }}</button>																												
 													</div>
 												</div>

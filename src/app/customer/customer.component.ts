@@ -45,6 +45,7 @@ export class CustomerComponent implements OnInit {
 	notify = { 'status' : false, 'message' : '' }; /* Set notify default flag status for notification alert */
 	customerPopulateParams = {}; /* Populate customer information for edit */
 	isUpdate = "Save"; /* Setting flag to check whether its new customer or existing customer */
+	isDelete = false; /* Setting flag to delete customer */
 	
 	  /*
 	   * Injecting required services into contructor
@@ -162,7 +163,11 @@ export class CustomerComponent implements OnInit {
 			/* Set nofify message on success */
 			this.notify.message = "Your company has been successfully updated.";
 			if ( this.isUpdate == "Save" ) {
-				this.notify.message = "Your company has been successfully Created.";
+				this.notify.message = "Your company has been successfully created.";
+			}
+			
+			if ( this.isDelete ) {
+				this.notify.message = "Your company has been successfully deleted.";
 			}
 			
 			/* To reset form values */
@@ -176,6 +181,17 @@ export class CustomerComponent implements OnInit {
       	}
 	}
 
+	onDelete() {
+		this.isDelete = false; /* Reset delete flag */
+		this.notify.status = false; /* Reset notify status flag */
+		if( this.customerForm.value.customer_number ) {
+			this.isDelete = true;
+			/* Making service call to customer deletion */
+		    this.customerService.deleteCustomer( this.customerForm.value )
+		      .subscribe(data => this.onCustomerServiceResponse(data), error => {});
+		    return false;			
+		}
+	}
 
 	/* On select the customer */
 	onSelect(customer): void {
