@@ -33,6 +33,9 @@ import { CustomerComponent } from './customer/customer.component';
 /* Importing invoice module */
 import { InvoiceComponent } from './invoice/invoice.component';
 
+/* Importing create invoice module */
+import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
+
 /* --------------------------- Custom modules --------------------------- ends */
 
 /* Initializing route constant */
@@ -42,7 +45,8 @@ const routes: Routes = [
     { path: 'log-in', component: LoginInComponent }, /* Login page */
     { path: 'home', canActivate: [ AuthGuardService ], component: DashboardComponent }, /* Dashboard page */
     { path: 'customer', canActivate: [ AuthGuardService ], component: CustomerComponent }, /* Customer page */
-    { path: 'invoice', canActivate: [ AuthGuardService ], component: InvoiceComponent } /* Invoice page */
+    { path: 'invoice', canActivate: [ AuthGuardService ], component: InvoiceComponent }, /* Invoice page */
+    { path: 'create-invoice', canActivate: [ AuthGuardService ], component: CreateInvoiceComponent } /* Create invoice page */
 ];
 
 @NgModule({

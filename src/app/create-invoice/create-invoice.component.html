@@ -1,0 +1,273 @@
+        <div class="main-wrapper">
+            <div class="header">
+                <div class="header-left">
+                    <a href="/home" class="logo">
+						<img src="assets/img/logo.png" alt="">
+					</a>
+                </div>
+				<ul class="nav navbar-nav main-menu">
+					<li>
+						<a href="/customer">Customers</a>
+					</li>
+					<li class="active">
+						<a href="/invoice">Invoices</a>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right user-menu pull-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<i class="fa fa-th-large"></i>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="/invoice"><i class="fa fa-bar-chart"></i> Invoice Management</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="profile.html" class="dropdown-toggle user-link" data-toggle="dropdown" title="Ryan Taylor">
+							<span class="user-img"><img class="img-circle" src="assets/img/user.jpg" width="31" alt="Ryan Taylor"></span>
+							<span>Ryan Taylor</span>
+							<i class="caret"></i>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="javascript:void(0);" (click)="onLogout()">Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+            </div>
+            <div class="page-wrapper">
+                <div class="content container-fluid">
+					<div class="page-inner">
+						<div class="fixed-header">
+							<div class="breadcrumb-menu">
+								<ul class="breadcrumb">
+									<li class="active"><span class="breadcrumb-number">1</span> Create invoice</li>
+									<li><span class="breadcrumb-number">2</span> Approve and send</li>
+								</ul>
+							</div>
+							<div class="button-sec">
+								<a class="btn btn-default m-r-10" (click)="onCancel()" href="javascript:void(0);">Cancel</a>
+								<a class="btn btn-orange m-r-10" (click)="onFormSubmit()" href="javascript:void(0);">Save as draft</a>
+								<a class="btn btn-blue" href="/create-invoice">Next</a>
+							</div>
+						</div>
+						<form class="form-horizontal" [formGroup]="invoiceForm"   (ngSubmit)="onFormSubmit()">
+							<div class="inv-wrapper">
+								<div class="display-table">
+									<div class="col-sm-6 col-md-7 section-left">
+										<div class="display-table">
+											<div class="table-row">
+												<div class="table-body">
+													<div class="">
+														<div class="inv-section">
+															<div class="inv-form">
+																<div class="search-sec">
+																	<div class="row">
+																		<div class="col-md-3 col-xs-6">
+																			<div class="input-group">
+																				<span class="input-group-addon"><i class="fa fa-search"></i></span>
+																				<input type="text" class="form-control" placeholder="Search in the list">
+																			</div>
+																		</div>
+																		<div class="col-md-9 col-xs-6">
+																			<a class="userfilter-icon" href="#" data-toggle="tooltip" data-placement="top" title="Filter by person"><img src="assets/img/userfilter.png" alt=""></a>
+																			<div class="section-title">
+																				<h3>Invoice</h3>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<hr>
+																	<div class="row">
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<label class="col-md-3 control-label">Invoice Number</label>
+																				<div class="col-md-9">
+																					<div class="form-control">301245698</div>
+																				</div>
+																			</div>
+																			<div class="form-group">
+																				<label class="col-md-3 control-label">Date of invoice</label>
+																				<div class="col-md-9">
+																					<div class="cal-icon"><input type="text" class="form-control datetimepicker" formControlName = "date_of_invoice"></div>
+																				</div>
+																			</div>
+																			<div class="form-group">
+																				<label class="col-md-3 control-label">Payment terms</label>
+																				<div class="col-md-9">
+																					<select class="select" formControlName = "payment_terms">
+																						<option>Select</option>
+																						<option value="30 days">30 days</option>
+																						<option value="20 days">20 days</option>
+																					</select>
+																				</div>
+																			</div>
+																			<div class="form-group">
+																				<label class="col-md-3 control-label">Due date</label>
+																				<div class="col-md-9">
+																					<div class="form-control">25/03/2018</div>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="col-md-6">
+																			<div class="form-group m-0">
+																				<label>Your message:</label>
+																				<textarea placeholder="Enter message" formControlName = "message" class="form-control" cols="5" rows="5"></textarea>
+																			</div>
+																		</div>
+																	</div>
+															</div>
+															<div class="inv-details-list">
+																<hr>
+																<div class="table-responsive">
+																	<table class="table">
+																		<thead>
+																			<tr>
+																				<th>Description</th>
+																				<th>Date</th>
+																				<th>Qty</th>
+																				<th>Unit</th>
+																				<th>Unit price</th>
+																				<th>CGst %</th>
+																				<th>SGst %</th>
+																				<th>Total</th>
+																				<th></th>
+																			</tr>
+																		</thead>
+																		<tbody>
+																			<tr>
+																				<td>
+																					<input class="form-control" placeholder="A product of" formControlName = "description">
+																				</td>
+																				<td>
+																					<div class="cal-icon"><input type="text" class="form-control datetimepicker" formControlName = "date"></div>
+																				</td>
+																				<td>
+																					<input type="text" class="form-control" placeholder="2.00" formControlName = "quantity">
+																				</td>
+																				<td>
+																					<select class="select" formControlName = "unit">
+																						<option>Please Select</option>
+																						<option value="pcs" selected>pcs</option>
+																						<option value="cm">cm</option>
+																						<option value="kg">kg</option>
+																					</select>
+																				</td>
+																				<td>
+																					<input type="text" class="form-control" value="$ 15.00" formControlName = "unit_price">
+																				</td>
+																				<td>
+																					<input type="text" class="form-control" value="6.5%" formControlName = "cgst">
+																				</td>
+																				<td>
+																					<input type="text" class="form-control" value="6.5%" formControlName = "sgst">
+																				</td>
+																				<td>
+																					<input type="text" class="form-control" value="$ 35.00" formControlName = "total">
+																				</td>
+																				<!--  <td><a href="" class="delete-row"><i class="fa fa-close"></i></a></td> -->
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-md-6">
+																	<div class="add-item">
+																		<!-- <a href="" class="btn btn-orange"><i class="fa fa-plus"></i> Add item</a> -->
+																	</div>
+																</div>
+																<div class="col-md-6">
+																	<div class="inv-amount">
+																		<hr>
+																		<div class="total-row"><span class="inv-label">Net Total</span> <div class="inv-grand">$ 30.00</div></div>
+																		<div class="total-row"><span class="inv-label">CGST 6.5%</span> <div class="inv-grand">$ 2.50</div></div>
+																		<div class="total-row"><span class="inv-label">SGST 6.5%</span> <div class="inv-grand">$ 2.50</div></div>
+																		<hr>
+																		<div class="total-row">
+																			<div class="grand-total">
+																				<span class="inv-label">Total Amount Due</span><div class="inv-grand">$ 35.00</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-md-12">
+																	<label>Invoice footernote</label>
+																	<textarea class="form-control" type="text" maxlength="250" formControlName = "footer_note"></textarea>
+																</div>
+															</div>
+														</div>	
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-2 col-md-2 section-right p-r-0">
+										<div class="display-table">
+											<div class="table-row">
+												<div class="table-body">
+													<div class="table-inner">
+														<div class="panel m-b-0">
+															<div class="panel-heading">
+																<h4 class="panel-title">Invoice Settings</h4>
+															</div>
+															<div class="panel-body">
+																<div class="form-group">
+																	<label>Invoice as</label>
+																	<select class="select">
+																		<option>Please Select</option>
+																		<option selected>Dreamguys Technologies</option>
+																		<option>Cream Transport</option>
+																	</select>
+																</div>
+																<div class="form-group">
+																	<label>Invoice type</label>
+																	<select class="select">
+																		<option>Please Select</option>
+																		<option selected>Sales</option>
+																		<option>Sales excluding VAT</option>
+																	</select>
+																</div>
+																<div class="form-group">
+																	<label>Invoice as</label>
+																	<select class="select">
+																		<option>Visible coloumns</option>
+																		<option selected>Date, Qty, Unit, Unit Price</option>
+																		<option>Cream Transport</option>
+																	</select>
+																</div>
+																<div class="form-group">
+																	<label>Currency</label>
+																	<select class="select">
+																		<option>Please Select</option>
+																		<option selected>Dollar</option>
+																		<option>Euro</option>
+																	</select>
+																</div>
+																<div class="form-group">
+																	<label>Invoicing Language</label>
+																	<select class="select">
+																		<option>Please Select</option>
+																		<option selected>English</option>
+																		<option>French</option>
+																	</select>
+																</div>
+																<div class="form-group m-b-0">
+																	<label>Invoice header</label>
+																	<input class="form-control" type="text" value="INVOICE">
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>			
+			</div>
+        </div>

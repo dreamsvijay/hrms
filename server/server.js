@@ -51,6 +51,8 @@ require('./models/user')(app); /* including user model with app */
 
 require('./models/customer')(app); /* including customer model with app */
 
+require('./models/invoice')(app); /* including invoice model with app */
+
 /* listen (start app with node server.js) */
 
 app.listen(port, function () {

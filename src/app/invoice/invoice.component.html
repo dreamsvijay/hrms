@@ -1,23 +1,23 @@
         <div class="main-wrapper">
             <div class="header">
                 <div class="header-left">
-                    <a href="index.html" class="logo">
+                    <a href="/home" class="logo">
 						<img src="assets/img/logo.png" alt="">
 					</a>
                 </div>
 				<ul class="nav navbar-nav main-menu">
 					<li>
-						<a href="#">Customers</a>
+						<a href="/customer">Customers</a>
 					</li>
 					<li class="active">
-						<a href="#">Invoices</a>
+						<a href="/invoice">Invoices</a>
 					</li>
-					<li>
+					<!-- <li>
 						<a href="#">Reports</a>
 					</li>
 					<li>
 						<a href="#">Settings</a>
-					</li>
+					</li> -->
 				</ul>
 				<ul class="nav navbar-nav navbar-right user-menu pull-right">
 					<li class="dropdown">
@@ -25,82 +25,8 @@
 							<i class="fa fa-th-large"></i>
 						</a>
 						<ul class="dropdown-menu">
-							<li><a href="#"><i class="fa fa-files-o"></i> Project Management</a></li>
-							<li><a href="invoices.html"><i class="fa fa-bar-chart"></i> Invoice Management</a></li>
-							<li><a href="payroll.html"><i class="fa fa-user"></i> Payroll Management</a></li>
+							<li><a href="/invoice"><i class="fa fa-bar-chart"></i> Invoice Management</a></li>
 						</ul>
-					</li>
-					<li class="dropdown hidden-xs">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/notification.png" alt=""> <span class="badge pull-right">5</span></a>
-						<div class="dropdown-menu notifications">
-							<div class="topnav-dropdown-header">
-								<span>Notifications</span>
-							</div>
-							<div class="drop-scroll">
-								<ul class="media-list">
-									<li class="media notification-message">
-										<a href="activities.html">
-											<div class="media-left">
-												<span class="avatar">
-													<img alt="John Doe" src="assets/img/user.jpg" class="img-responsive img-circle">
-												</span>
-											</div>
-											<div class="media-body">
-												<p class="m-0 noti-details"><span class="noti-title">John Doe</span> added new task <span class="noti-title">Patient appointment booking</span></p>
-												<p class="m-0"><span class="notification-time">4 mins ago</span></p>
-											</div>
-										</a>
-									</li>
-									<li class="media notification-message">
-										<a href="activities.html">
-											<div class="media-left">
-												<span class="avatar">V</span>
-											</div>
-											<div class="media-body">
-												<p class="m-0 noti-details"><span class="noti-title">Tarah Shropshire</span> changed the task name <span class="noti-title">Appointment booking with payment gateway</span></p>
-												<p class="m-0"><span class="notification-time">6 mins ago</span></p>
-											</div>
-										</a>
-									</li>
-									<li class="media notification-message">
-										<a href="activities.html">
-											<div class="media-left">
-												<span class="avatar">L</span>
-											</div>
-											<div class="media-body">
-												<p class="m-0 noti-details"><span class="noti-title">Misty Tison</span> added <span class="noti-title">Domenic Houston</span> and <span class="noti-title">Claire Mapes</span> to project <span class="noti-title">Doctor available module</span></p>
-												<p class="m-0"><span class="notification-time">8 mins ago</span></p>
-											</div>
-										</a>
-									</li>
-									<li class="media notification-message">
-										<a href="activities.html">
-											<div class="media-left">
-												<span class="avatar">G</span>
-											</div>
-											<div class="media-body">
-												<p class="m-0 noti-details"><span class="noti-title">Rolland Webber</span> completed task <span class="noti-title">Patient and Doctor video conferencing</span></p>
-												<p class="m-0"><span class="notification-time">12 mins ago</span></p>
-											</div>
-										</a>
-									</li>
-									<li class="media notification-message">
-										<a href="activities.html">
-											<div class="media-left">
-												<span class="avatar">V</span>
-											</div>
-											<div class="media-body">
-												<p class="m-0 noti-details"><span class="noti-title">Bernardo Galaviz</span> added new task <span class="noti-title">Private chat module</span></p>
-												<p class="m-0"><span class="notification-time">2 days ago</span></p>
-											</div>
-										</a>
-									</li>
-								</ul>
-							</div>
-							<div class="topnav-dropdown-footer">
-								<a href="activities.html">View all Notifications</a>
-							</div>
-						</div>
 					</li>
 					<li class="dropdown">
 						<a href="profile.html" class="dropdown-toggle user-link" data-toggle="dropdown" title="Ryan Taylor">
@@ -109,8 +35,7 @@
 							<i class="caret"></i>
 						</a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Settings</a></li>
-							<li><a href="login.html">Logout</a></li>
+							<li><a href="javascript:void(0);" (click)="onLogout()">Logout</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -126,9 +51,9 @@
 											<div class="table-inner">
 												<div class="sub-pages">
 													<ul class="nav nav-tabs nav-justified">
-														<li class="active"><a href="#">Drafts</a></li>
-														<li><a href="#">Invoices</a></li>
-														<li><a href="#">Estimates</a></li>
+														<li class="active"><a href="/invoice">Drafts</a></li>
+														<li><a href="/invoice">Invoices</a></li>
+														<li><a href="/invoice">Estimates</a></li>
 													</ul>
 												</div>
 												<div class="sec-content border-top p-b-0">
@@ -158,33 +83,19 @@
 																</tr>
 															</thead>
 															<tbody>
-																<tr class="filter-inv">
-																	<td class="inv-year">Dec 2018</td>
-																	<td></td>
-																	<td></td>
-																	<td>0.00</td>
-																	<td>0.00</td>
-																</tr>
-																<tr>
+																<!-- <tr>
 																	<td>#321654789</td>
 																	<td>Foodco Company Pvt. Ltd.</td>
 																	<td>13/01/2018</td>
 																	<td>0.00</td>
 																	<td>0.00</td>
-																</tr>
-																<tr>
-																	<td>#321654789</td>
-																	<td>Foodco Company Pvt. Ltd.</td>
-																	<td>13/01/2018</td>
-																	<td>0.00</td>
-																	<td>0.00</td>
-																</tr>
-																<tr>
-																	<td>#321654789</td>
-																	<td>Foodco Company Pvt. Ltd.</td>
-																	<td>13/01/2018</td>
-																	<td>0.00</td>
-																	<td>0.00</td>
+																</tr> -->
+																<tr *ngFor="let invoice of invoices; let i = index">
+																	<td><label>{{i + 1}}</label></td>
+																	<td><label><a href="javascript:void(0);" (click)="onSelect(invoice)">{{invoice.name}}</a></label></td>
+																	<td><label>{{invoice.email}}</label></td>
+																	<td class="text-right"><label>0.00</label></td>
+																	<td class="text-right"><label>0.00</label></td>
 																</tr>
 															</tbody>
 														</table>
@@ -213,8 +124,7 @@
 							<div class="section-right inv-section-right">
 								<div class="display-table">                                	
 									<div class="button-sec">
-										<a class="addbtn m-r-10" href="create-invoice.html"><span><img src="assets/img/plus.png" alt=""></span> Create Invoice</a>
-										<a class="addbtn" href="#"><span><img src="assets/img/plus.png" alt=""></span> Create Estimate</a>
+										<a class="addbtn m-r-10" href="/create-invoice"><span><img src="assets/img/plus.png" alt=""></span> Create Invoice</a>
 									</div>
 									<div class="table-row">
 										<div class="table-body">

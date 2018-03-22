@@ -9,6 +9,9 @@
 					<li class="active">
 						<a href="/customer">Customers</a>
 					</li>
+					<li>
+						<a href="/invoice">Invoices</a>
+					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right user-menu pull-right">
 					<li class="dropdown">
@@ -92,6 +95,9 @@
 							</div>
 							<div class="section-right">
 								<div class="display-table">
+									<alert type="success" [dismissOnTimeout]="5000" *ngIf="notify.status">
+								  		<strong>Well done!</strong> {{notify.message}}
+									</alert>
 									<div class="button-sec">
 										<a class="btn btn-orange" (click)="onCancel()" href="javascript:void(0);">Add New Customer</a>
 									</div>

@@ -65,7 +65,15 @@ import { AuthGuardService } from './services/authentication/auth-guard.service';
 
 /* Importing auth service to get authentication information */
 import { AuthUserService } from './services/authentication/auth.service';
+
+/* For invoice module */
 import { InvoiceComponent } from './invoice/invoice.component';
+
+/* For create invoice module */
+import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
+
+/* Importing Invoice API service */
+import { InvoiceService } from './services/api/invoice.service';
 
 /* --------------------------- Custom modules --------------------------- ends */
 
@@ -102,7 +110,9 @@ let config = new AuthServiceConfig([
     DashboardComponent, /* Dashboard module */
     CustomerComponent, /* Customer module */
     AlertNotificationComponent, /* Common alert notification module */
-    EmailValidationDirective, InvoiceComponent,  /* Email validation directive  */
+    EmailValidationDirective, /* Email validation directive  */ 
+    InvoiceComponent,  /* Invoice module  */
+    CreateInvoiceComponent /* Create invoice module  */
   ],
   imports: [
     AppRoutingModule, /* Route module for navigation */
@@ -127,7 +137,8 @@ let config = new AuthServiceConfig([
   providers: [	UserService, /* For accessing User API services */
               	CustomerService, /* For accessing Customer API services */
   				AuthGuardService, /* For authorization and authentication */
-  				AuthUserService /* For getting authentication information */
+  				AuthUserService, /* For getting authentication information */
+  				InvoiceService /* For getting invoice information */
   			],
   bootstrap: [AppComponent] /* Initializing root module */
 })
