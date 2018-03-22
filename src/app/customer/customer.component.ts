@@ -23,6 +23,9 @@ import { CustomerService } from '../services/api/customer.service';
 /* Importing auth service to get authentication information */
 import { AuthUserService } from '../services/authentication/auth.service';
 
+/* Import Customer model */
+import { Customer } from '../models/customer';
+
 /* --------------------------- Custom modules --------------------------- ends */
 
 @Component({
@@ -39,7 +42,9 @@ export class CustomerComponent implements OnInit {
 	
 	customers; /* defiing private variable to hold customer list */
 	customerForm: FormGroup; /* defining customerForm as form group object */
-	notify = false; /* Set notify default flag status for notification alert */
+	notify = { 'status' : false, 'message' : '' }; /* Set notify default flag status for notification alert */
+	customerPopulateParams = {}; /* Populate customer information for edit */
+	isUpdate = "Save"; /* Setting flag to check whether its new customer or existing customer */
 	
 	  /*
 	   * Injecting required services into contructor
@@ -107,32 +112,25 @@ export class CustomerComponent implements OnInit {
 	   * @param customerForm Object | customer information
 	   */
 	onFormSubmit = function(){
-		
-		/* Making service call to customer creation */
-	    this.customerService.createCustomer(this.customerForm.value)
-	      .subscribe(data => {
-	      	if( data ) {
-	      		/* Navigating to customer page after successful creation of customer */
-	      		this.router.navigate(['customer']);
-	      		
-	      		/* Update customer list to get immediate affect in user's view */
-				this.getCustomers();
-				
-				/* To reset form values */
-				this.onCancel();
-				
-				this.notify = true; /* To set notify flag to alert success message */	      	}
-	      	else {
-	      		/* Navigating to customer page after unsuccessful creation of customer */
-	      		this.router.navigate(['customer']);
-	      	}
-	      }, error => this.errorMessage = error);
-	    return false;
+		this.notify.status = false; /* Reset notify status flag */
+		if( !this.customerForm.value.customer_number ) {
+			/* Making service call to customer creation */
+		    this.customerService.createCustomer( this.customerForm.value )
+		      .subscribe(data => this.onCustomerServiceResponse(data), error => this.errorMessage = error);
+		    return false;
+		}
+		else {
+			/* Making service call to customer updation */
+		    this.customerService.updateCustomer( this.customerForm.value )
+		      .subscribe(data => this.onCustomerServiceResponse(data), error => this.errorMessage = error);
+		    return false;			
+		}
 	}
 	
 	/* To reset form values */
     onCancel = function() {
-    	this.customerForm.reset();
+		this.customerForm.reset();
+		this.isUpdate = "Save";
 	} 
 	
 	/**
@@ -148,5 +146,57 @@ export class CustomerComponent implements OnInit {
 		script.defer = true;
 		body.appendChild(script);
 	}
-	
+
+	/**
+	 * Function on successful service call
+	 * @param data Object | Response from customer service
+	 */
+	onCustomerServiceResponse = function(data) {
+      	if( data ) {
+      		/* Navigating to customer page after successful creation of customer */
+      		this.router.navigate(['customer']);
+      		
+      		/* Update customer list to get immediate affect in user's view */
+			this.getCustomers();
+			
+			/* Set nofify message on success */
+			this.notify.message = "Your company has been successfully updated.";
+			if ( this.isUpdate == "Save" ) {
+				this.notify.message = "Your company has been successfully Created.";
+			}
+			
+			/* To reset form values */
+			this.onCancel();
+			
+			this.notify.status = true; /* To set notify flag to alert success message */
+      	}
+      	else {
+      		/* Navigating to customer page after unsuccessful creation of customer */
+      		this.router.navigate(['customer']);
+      	}
+	}
+
+
+	/* On select the customer */
+	onSelect(customer): void {
+		this.customerPopulateParams['customer_number'] = customer._id;
+		this.customerPopulateParams['company_name'] = customer.name;
+		this.customerPopulateParams['company_number'] = customer.company_no;
+		this.customerPopulateParams['gst_number'] = customer.gst_no;
+		this.customerPopulateParams['title'] = customer.title;
+		this.customerPopulateParams['first_name'] = customer.first_name;
+		this.customerPopulateParams['last_name'] = customer.last_name;
+		this.customerPopulateParams['email'] = customer.email;
+		this.customerPopulateParams['phone'] = customer.contact_numbers.mobile_number;
+		this.customerPopulateParams['mobile_phone'] = customer.contact_numbers.phone;
+		this.customerPopulateParams['invoice_address_line1'] = customer.addresses.invoice_address.address_line_1;
+		this.customerPopulateParams['invoice_address_line2'] = customer.addresses.invoice_address.address_line_2;
+		this.customerPopulateParams['invoice_postcode'] = customer.addresses.invoice_address.postcode;
+		this.customerPopulateParams['invoice_city'] = customer.addresses.invoice_address.city;
+
+		this.customerForm.patchValue(this.customerPopulateParams);
+		this.isUpdate = "Update";
+	}
 }
+	
+

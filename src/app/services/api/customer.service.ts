@@ -34,6 +34,8 @@ export class CustomerService {
 		createCustomer(customer): Observable<any> {
 				var customerParams = {
 					name: customer.company_name,
+					first_name: customer.first_name,
+					last_name: customer.last_name,
 					title: customer.title,
 				    company_no: customer.company_number,
 					gst_no: customer.gst_number,
@@ -58,6 +60,39 @@ export class CustomerService {
 			    );
 		}
 
+	    /** 
+	     * Updating customer service call
+	     * @param customer Object | customer information
+	     */
+		updateCustomer(customer): Observable<any> {
+				var customerParams = {
+					name: customer.company_name,
+					first_name: customer.first_name,
+					last_name: customer.last_name,
+					title: customer.title,
+				    company_no: customer.company_number,
+					gst_no: customer.gst_number,
+				    email: customer.email,
+				    addresses: {
+				    			invoice_address: {
+				    				address_line_1: customer.invoice_address_line1,
+				    				address_line_2: customer.invoice_address_line2,
+				    				postcode: customer.invoice_postcode,
+				    				city: customer.invoice_city,
+				    				country: customer.invoice_country
+				    			}
+				    },
+				    contact_numbers: {
+				    	phone: customer.phone, 
+				    	mobile_number: customer.mobile_phone
+				    }
+				};
+			    return this.http.put('http://localhost:8080/customers/' + customer.customer_number, customerParams).pipe(
+			      tap(_ => console.log(`${customer.email} updated successfully`)),
+			      catchError(this.handleError<any>('Customer Updation Error'))
+			    );
+		}
+		
 		/* Get customers list service call */
 		getCustomers(): Observable<any> {
 		    return this.http.get(`${this.ApiServiceUrl}/customers?sort=-createdAt`).pipe(

@@ -13,6 +13,8 @@ module.exports = function(app) {
 	/* Definig schema for customer */
 	customersSchema = new mongo.Schema({
 		name: String,
+		first_name: String,
+		last_name: String,
 		title: String,
 	    logo_id: String,
 	    company_no:String,
