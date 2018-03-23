@@ -5,7 +5,7 @@
 import { Component, OnInit } from '@angular/core';
 
 /* Import forms module to use validation, controls etc. */
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 
 /* Import Custom forms module to use validator  */
 import { CustomValidators } from 'ng4-validators';
@@ -23,6 +23,9 @@ import { AuthUserService } from '../services/authentication/auth.service';
 /* Include invoice service */
 import { InvoiceService } from '../services/api/invoice.service';
 
+/* Include customer service */
+import { CustomerService } from '../services/api/customer.service';
+
 /* --------------------------- Custom modules --------------------------- ends */
 
 @Component({
@@ -31,38 +34,82 @@ import { InvoiceService } from '../services/api/invoice.service';
   styleUrls: ['./create-invoice.component.css']
 })
 export class CreateInvoiceComponent implements OnInit {
-
+	
 	invoiceForm: FormGroup; /* defining invoiceForm as form group object */
 	notify = { 'status' : false, 'message' : '' }; /* Set notify default flag status for notification alert */
 	invoicePopulateParams = {}; /* Populate invoice information for edit */
 	isUpdate = "Save"; /* Setting flag to check whether its new invoice or existing customer */
 	isDelete = false; /* Setting flag to delete customer */
-
+	invoiceNumber; /* Random invoice number */
+	dueDate; /* Invoice due date */
+	items;
+	
 	  /*
 	   * Injecting required services into contructor
 	   * Router | for route navigation
 	   * InvoiceService | for making invoice api service calls
+	   * CustomerService | for making customer api service calls
 	   * */
-  constructor( private authUserService: AuthUserService, private router: Router, private invoiceService: InvoiceService ) { }
+  constructor( private authUserService: AuthUserService, private router: Router, private invoiceService: InvoiceService, private customerService: CustomerService, private formBuilder: FormBuilder ) { }
 
   ngOnInit() {
+		
+		this.invoiceNumber = this.generate();
+		this.dueDate = new Date();
+		this.dueDate = this.dueDate.setDate( this.dueDate.getDate() + 30 );
+		
 		/* Initiating invoiceForm formgroup variables */ 
 		this.invoiceForm = new FormGroup({
+			'estimate_uid': new FormControl( this.invoiceNumber ),
+			'project_id': new FormControl( "5ab346414b00110dfc0422fa" ), /* TODO: have to get the customer id by selection */
+			'due_date': new FormControl( this.dueDate ),
 			'date_of_invoice': new FormControl(),
-			'payment_terms': new FormControl('', Validators.required),
-			'message': new FormControl('',CustomValidators.number),
-			'description': new FormControl(), 
-			'date': new FormControl(),
-			'quantity': new FormControl(),
-			'unit': new FormControl(),
-			'unit_price': new FormControl('',CustomValidators.email), 
-			'cgst': new FormControl('', CustomValidators.number),
-			'sgst': new FormControl('', CustomValidators.number),
-			'total': new FormControl(),
-			'footer_note': new FormControl()
+			'payment_terms': new FormControl(''),
+			'message': new FormControl(''),
+			'footer_note': new FormControl(),
+			'items': this.formBuilder.array([ this.createItem() ])
 		});
   }
 
+  	createItem(): FormGroup {
+		  return this.formBuilder.group({
+			  description: '',
+			  date: '',
+			  quantity: '',
+			  unit: '',
+			  unit_price: '',
+			  cgst: '',
+			  sgst: '',
+			  total: '',
+		  });
+  	}
+
+  	addItem(): void {
+  	  this.items = this.invoiceForm.get('items') as FormArray;
+  	  this.items.push(this.createItem());
+  	}
+  	
+  	removeItem( itemIndex ): void {
+  	    // control refers to your formarray
+  	    const control = <FormArray>this.invoiceForm.controls['items'];
+  	    // remove the chosen row
+  	    control.removeAt(itemIndex);
+  	}
+  	
+	/**
+	 * Function to get random number within limit
+	 * @param min int | minimum limit
+	 * @param max int | maximum limit
+	 */
+    getRandomInt = function(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    
+    /* Random generation invoice id */
+    generate = function() {
+        return this.number = this.getRandomInt(1, 9999) + Math.random().toString(36).substr(2, 5);
+    }
+  
 	/* User logout */
 	/* TODO: have to make it as service call */
 	onLogout = function() {
@@ -101,6 +148,8 @@ export class CreateInvoiceComponent implements OnInit {
 			this.onCancel();
 			
 			this.notify.status = true; /* To set notify flag to alert success message */
+			
+			this.router.navigate(['invoice']);
       	}
       	else {
       		/* Navigating to customer page after unsuccessful creation of customer */

@@ -51,6 +51,9 @@
 							</div>
 						</div>
 						<form class="form-horizontal" [formGroup]="invoiceForm"   (ngSubmit)="onFormSubmit()">
+							<input class="form-control" type="hidden" formControlName = "project_id">
+							<input class="form-control" type="hidden" formControlName = "estimate_uid">
+							<input class="form-control" type="hidden" formControlName = "due_date">
 							<div class="inv-wrapper">
 								<div class="display-table">
 									<div class="col-sm-6 col-md-7 section-left">
@@ -82,7 +85,7 @@
 																			<div class="form-group">
 																				<label class="col-md-3 control-label">Invoice Number</label>
 																				<div class="col-md-9">
-																					<div class="form-control">301245698</div>
+																					<div class="form-control">{{invoiceNumber}}</div>
 																				</div>
 																			</div>
 																			<div class="form-group">
@@ -94,17 +97,17 @@
 																			<div class="form-group">
 																				<label class="col-md-3 control-label">Payment terms</label>
 																				<div class="col-md-9">
-																					<select class="select" formControlName = "payment_terms">
-																						<option>Select</option>
-																						<option value="30 days">30 days</option>
-																						<option value="20 days">20 days</option>
+																					<select class="" formControlName = "payment_terms">
+																						<option value="">Select</option>
+																				        <option value="30 Days">30 Days</option>
+																				        <option value="20 Days">20 Days</option>
 																					</select>
 																				</div>
 																			</div>
 																			<div class="form-group">
 																				<label class="col-md-3 control-label">Due date</label>
 																				<div class="col-md-9">
-																					<div class="form-control">25/03/2018</div>
+																					<div class="form-control">{{dueDate | date}}</div>
 																				</div>
 																			</div>
 																		</div>
@@ -133,8 +136,8 @@
 																				<th></th>
 																			</tr>
 																		</thead>
-																		<tbody>
-																			<tr>
+																		<tbody formArrayName="items" *ngFor="let item of invoiceForm.get('items').controls; let i = index;">
+																			<tr [formGroupName]="i">
 																				<td>
 																					<input class="form-control" placeholder="A product of" formControlName = "description">
 																				</td>
@@ -145,7 +148,7 @@
 																					<input type="text" class="form-control" placeholder="2.00" formControlName = "quantity">
 																				</td>
 																				<td>
-																					<select class="select" formControlName = "unit">
+																					<select class="" formControlName = "unit">
 																						<option>Please Select</option>
 																						<option value="pcs" selected>pcs</option>
 																						<option value="cm">cm</option>
@@ -164,7 +167,7 @@
 																				<td>
 																					<input type="text" class="form-control" value="$ 35.00" formControlName = "total">
 																				</td>
-																				<!--  <td><a href="" class="delete-row"><i class="fa fa-close"></i></a></td> -->
+																				<td><a href="javascript:void(0);" class="delete-row" (click)="removeItem(i)"><i class="fa fa-close"></i></a></td>
 																			</tr>
 																		</tbody>
 																	</table>
@@ -173,7 +176,7 @@
 															<div class="row">
 																<div class="col-md-6">
 																	<div class="add-item">
-																		<!-- <a href="" class="btn btn-orange"><i class="fa fa-plus"></i> Add item</a> -->
+																		<a href="javascript:void(0);" class="btn btn-orange" (click)="addItem()"><i class="fa fa-plus"></i> Add item</a>
 																	</div>
 																</div>
 																<div class="col-md-6">
@@ -215,7 +218,7 @@
 															<div class="panel-body">
 																<div class="form-group">
 																	<label>Invoice as</label>
-																	<select class="select">
+																	<select class="">
 																		<option>Please Select</option>
 																		<option selected>Dreamguys Technologies</option>
 																		<option>Cream Transport</option>
@@ -223,7 +226,7 @@
 																</div>
 																<div class="form-group">
 																	<label>Invoice type</label>
-																	<select class="select">
+																	<select class="">
 																		<option>Please Select</option>
 																		<option selected>Sales</option>
 																		<option>Sales excluding VAT</option>
@@ -231,7 +234,7 @@
 																</div>
 																<div class="form-group">
 																	<label>Invoice as</label>
-																	<select class="select">
+																	<select class="">
 																		<option>Visible coloumns</option>
 																		<option selected>Date, Qty, Unit, Unit Price</option>
 																		<option>Cream Transport</option>
@@ -239,7 +242,7 @@
 																</div>
 																<div class="form-group">
 																	<label>Currency</label>
-																	<select class="select">
+																	<select class="">
 																		<option>Please Select</option>
 																		<option selected>Dollar</option>
 																		<option>Euro</option>
@@ -247,7 +250,7 @@
 																</div>
 																<div class="form-group">
 																	<label>Invoicing Language</label>
-																	<select class="select">
+																	<select class="">
 																		<option>Please Select</option>
 																		<option selected>English</option>
 																		<option>French</option>
