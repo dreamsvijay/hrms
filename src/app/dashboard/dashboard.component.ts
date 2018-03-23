@@ -38,9 +38,7 @@ export class DashboardComponent implements OnInit {
   constructor( private authUserService: AuthUserService, private userService: UserService, private router: Router ) { }
 
   ngOnInit() {
-	/* Loading script files at run time */
-	this.loadScript('../../assets/js/morris.min.js');
-	this.loadScript('../../assets/js/raphael-min.js');
+	/* Loading script files at run time */	
 	this.loadScript('../../assets/js/chart.js');
   }
 

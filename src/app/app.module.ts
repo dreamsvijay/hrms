@@ -48,6 +48,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 /* Importing customer module */
 import { CustomerComponent } from './customer/customer.component';
 
+/* Importing header module */
+import { HeaderComponent } from './header/header.component'; 
+
 /* Importing alert module for common notification alert to all modules */
 import { AlertNotificationComponent } from './alert-notification/alert-notification.component';
 
@@ -112,7 +115,8 @@ let config = new AuthServiceConfig([
     AlertNotificationComponent, /* Common alert notification module */
     EmailValidationDirective, /* Email validation directive  */ 
     InvoiceComponent,  /* Invoice module  */
-    CreateInvoiceComponent /* Create invoice module  */
+    CreateInvoiceComponent, /* Create invoice module  */
+    HeaderComponent, /* Create header module  */
   ],
   imports: [
     AppRoutingModule, /* Route module for navigation */
