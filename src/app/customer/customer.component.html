@@ -46,6 +46,9 @@
 															</div>
 															<div class="col-md-6 col-xs-2">
 																<a href="javascript:;" class="expand-icon"></a>
+																<a class="userfilter-icon" href="#" data-toggle="tooltip" data-placement="top" title="Filter by person">
+																	<img src="assets/img/userfilter.png" alt="">
+																</a>
 															</div>
 														</div>
 													</div>
@@ -98,8 +101,8 @@
 									<alert type="success" [dismissOnTimeout]="5000" *ngIf="notify.status">
 								  		<strong>Well done!</strong> {{notify.message}}
 									</alert>
-									<div class="button-sec">
-										<a class="btn btn-orange" (click)="onCancel()" href="javascript:void(0);">Add New Customer</a>
+									<div class="button-sec">										
+										<a class="addbtn m-r-10" href="/create-invoice"><span><img src="assets/img/plus.png" alt=""></span>Add New Customer</a>
 									</div>
 									<div class="table-row">
 										<div class="table-body">

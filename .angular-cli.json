@@ -28,10 +28,16 @@
       "scripts": [
         "../src/assets/js/jquery-3.2.1.min.js",
         "../src/assets/js/bootstrap.min.js",
-		"../src/assets/js/select2.min.js",
-		"../src/assets/js/moment.min.js",
-		"../src/assets/js/bootstrap-datetimepicker.min.js",
+        "../src/assets/js/select2.min.js",
+        "../src/assets/js/moment.min.js",
+        "../src/assets/js/bootstrap-datetimepicker.min.js",
+        "../src/assets/js/morris.min.js",
+        "../src/assets/js/raphael-min.js",
+        "../src/assets/js/chart.js",
         "../src/assets/js/app.js"    	
+
+
+
 	  ],
       "environmentSource": "environments/environment.ts",
       "environments": {
