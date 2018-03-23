@@ -132,7 +132,7 @@ let config = new AuthServiceConfig([
     /* For translation locale implementation - ends */
     
     SocialLoginModule.initialize(config), /* Initializing social logins */
-    AlertModule.forRoot(), /* making alert modules available to all modules */
+    AlertModule.forRoot() /* making alert modules available to all modules */
   ],
   providers: [	UserService, /* For accessing User API services */
               	CustomerService, /* For accessing Customer API services */
