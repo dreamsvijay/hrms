@@ -75,25 +75,20 @@
 														<table class="table no-border">
 															<thead>
 																<tr>
+																	<th style="min-width:15%;">No.</th>
 																	<th style="min-width:16%;">Invoice ID</th>
 																	<th style="min-width:40%;">Customer Name</th>
-																	<th style="min-width:20%;">Due Date</th>
-																	<th style="min-width:12%;">VAT</th>
-																	<th style="min-width:12%;">Total</th>
+																	<th style="min-width:15%;">Due Date</th>
+																	<th style="min-width:7%;">VAT</th>
+																	<th style="min-width:7%;">Total</th>
 																</tr>
 															</thead>
 															<tbody>
-																<!-- <tr>
-																	<td>#321654789</td>
-																	<td>Foodco Company Pvt. Ltd.</td>
-																	<td>13/01/2018</td>
-																	<td>0.00</td>
-																	<td>0.00</td>
-																</tr> -->
 																<tr *ngFor="let invoice of invoices; let i = index">
 																	<td><label>{{i + 1}}</label></td>
-																	<td><label><a href="javascript:void(0);" (click)="onSelect(invoice)">{{invoice.name}}</a></label></td>
-																	<td><label>{{invoice.email}}</label></td>
+																	<td><label>{{invoice.estimate_uid}}</label></td>
+																	<td><label><a href="javascript:void(0);" (click)="onSelect(invoice)"></a></label></td>
+																	<td><label>{{invoice.due_date}}</label></td>
 																	<td class="text-right"><label>0.00</label></td>
 																	<td class="text-right"><label>0.00</label></td>
 																</tr>

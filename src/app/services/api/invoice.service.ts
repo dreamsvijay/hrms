@@ -41,10 +41,15 @@ export class InvoiceService {
 	     */
 		createInvoice(invoice): Observable<any> {
 				var invoiceParams = {
-					message: invoice.message,
-					invoice_date: invoice.date_of_invoice,
-					foot_note: invoice.footer_note,
-					payment_terms: invoice.payment_terms,
+					estimate_uid: invoice.estimate_uid,
+					project_id: invoice.project_id,
+				    invoice_date: invoice.date_of_invoice,
+				    payment_terms: invoice.payment_terms,
+				    due_date: Date.parse( invoice.due_date ),
+				    message: invoice.message,
+				    foot_note: invoice.footer_note,
+				    status: String,
+				    is_ready: 0,
 				    deleted_on: null,
 				    created_by: this.authUserService.getUserId()
 				};
