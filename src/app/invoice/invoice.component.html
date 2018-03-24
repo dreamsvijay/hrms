@@ -1,17 +1,16 @@
 <app-header></app-header>
-        <div class="main-wrapper">
             <div class="header">
                 <div class="header-left">
-                    <a href="/home" class="logo">
+                    <a routerLink="/home" class="logo">
 						<img src="assets/img/logo.png" alt="">
 					</a>
                 </div>
 				<ul class="nav navbar-nav main-menu">
 					<li>
-						<a href="/customer">Customers</a>
+						<a routerLink="/customer">Customers</a>
 					</li>
 					<li class="active">
-						<a href="/invoice">Invoices</a>
+						<a routerLink="/invoice">Invoices</a>
 					</li>
 					<!-- <li>
 						<a href="#">Reports</a>
@@ -26,7 +25,7 @@
 							<i class="fa fa-th-large"></i>
 						</a>
 						<ul class="dropdown-menu">
-							<li><a href="/invoice"><i class="fa fa-bar-chart"></i> Invoice Management</a></li>
+							<li><a routerLink="/invoice"><i class="fa fa-bar-chart"></i> Invoice Management</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
@@ -41,7 +40,7 @@
 					</li>
 				</ul>
             </div>
-            <div class="page-wrapper">
+            <div>
                 <div class="content container-fluid">
 					<div class="page-inner">
 						<div class="display-table">
@@ -120,7 +119,7 @@
 							<div class="section-right inv-section-right">
 								<div class="display-table">                                	
 									<div class="button-sec">
-										<a class="addbtn m-r-10" href="/create-invoice"><span><img src="assets/img/plus.png" alt=""></span> Create Invoice</a>
+										<a class="addbtn m-r-10" routerLink="/create-invoice"><span><img src="assets/img/plus.png" alt=""></span> Create Invoice</a>
 									</div>
 									<div class="table-row">
 										<div class="table-body">
@@ -181,4 +180,3 @@
 					</div>					
 				</div>			
 			</div>
-        </div>
