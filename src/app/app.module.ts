@@ -77,6 +77,7 @@ import { CreateInvoiceComponent } from './create-invoice/create-invoice.componen
 
 /* Importing Invoice API service */
 import { InvoiceService } from './services/api/invoice.service';
+import { LanguageComponent } from './language/language.component';
 
 /* --------------------------- Custom modules --------------------------- ends */
 
@@ -116,7 +117,7 @@ let config = new AuthServiceConfig([
     EmailValidationDirective, /* Email validation directive  */ 
     InvoiceComponent,  /* Invoice module  */
     CreateInvoiceComponent, /* Create invoice module  */
-    HeaderComponent, /* Create header module  */
+    HeaderComponent, LanguageComponent, /* Create header module  */
   ],
   imports: [
     AppRoutingModule, /* Route module for navigation */

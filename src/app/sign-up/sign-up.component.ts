@@ -177,9 +177,14 @@ export class SignUpComponent implements OnInit {
   
   /* Switching language */
   /* TODO: have to make it as service call */
-  switchLanguage = (lang: string) => {
-    this.translate.use(lang); /* Using language for locale implementation */
-  }
+  // switchLanguage = (lang: string) => {
+  //   this.translate.use(lang); /* Using language for locale implementation */
+  // }
+
+  
+
+
+
     
 
 }
