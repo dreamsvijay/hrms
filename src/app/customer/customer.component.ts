@@ -212,6 +212,7 @@ export class CustomerComponent implements OnInit {
 		this.customerPopulateParams['invoice_address_line2'] = customer.addresses.invoice_address.address_line_2;
 		this.customerPopulateParams['invoice_postcode'] = customer.addresses.invoice_address.postcode;
 		this.customerPopulateParams['invoice_city'] = customer.addresses.invoice_address.city;
+		this.customerPopulateParams['invoice_country'] = customer.addresses.invoice_address.country;
 
 		this.customerForm.patchValue(this.customerPopulateParams);
 		this.isUpdate = "Update";

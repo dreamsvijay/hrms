@@ -82,7 +82,7 @@
 															<input class="form-control" type="hidden" formControlName = "customer_number">
 															<h4 class="form-title">Contact Details</h4>
 															<div class="row">
-																{{customerForm.value | json}}
+																<!-- {{customerForm.value | json}} -->
 																<div class="col-md-6">
 																	<div class="form-group" [ngClass]="{'has-error': customerForm.controls['company_name'].invalid  && customerForm.controls['company_name'].touched }">
 																		<label>Company name</label>
