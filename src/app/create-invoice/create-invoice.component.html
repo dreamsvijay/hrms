@@ -63,11 +63,16 @@
 																			<div class="form-group">
 																				<label class="col-md-3 control-label">Payment terms</label>
 																				<div class="col-md-9">
-																					<select class="" formControlName = "payment_terms">
-																						<option value="">Select</option>
-																				        <option value="30 Days">30 Days</option>
-																				        <option value="20 Days">20 Days</option>
-																					</select>
+																					<ng-select 
+																					formControlName="payment_terms"
+																					 [items]="terms"
+																					  bindLabel="name"
+																					   bindValue="name"
+																						class="form-group"
+																						 autocomplete="off"
+																					 placeholder="Select payment terms"
+																					 >
+																					</ng-select>
 																				</div>
 																			</div>
 																			<div class="form-group">
@@ -114,12 +119,16 @@
 																					<input type="text" class="form-control" placeholder="2.00" formControlName = "quantity">
 																				</td>
 																				<td>
-																					<select class="" formControlName = "unit">
-																						<option>Please Select</option>
-																						<option value="pcs" selected>pcs</option>
-																						<option value="cm">cm</option>
-																						<option value="kg">kg</option>
-																					</select>
+																					<ng-select 
+																						formControlName="unit"
+																						[items]="units"
+																						bindLabel="name"
+																						bindValue="name"
+																						class="form-group"
+																						autocomplete="off"
+																						placeholder="Select units"
+																					 >
+																					</ng-select>
 																				</td>
 																				<td>
 																					<input type="text" class="form-control" value="$ 15.00" formControlName = "unit_price">
@@ -184,43 +193,71 @@
 															<div class="panel-body">
 																<div class="form-group">
 																	<label>Invoice as</label>
-																	<select class="">
-																		<option>Please Select</option>
-																		<option selected>Dreamguys Technologies</option>
-																		<option>Cream Transport</option>
-																	</select>
+																	<ng-select 
+																	formControlName="company_name"
+																	[items]="company_names"
+																	bindLabel="name"
+																	bindValue="name"
+																	class="form-group"
+																	autocomplete="off"
+																	placeholder="Select invoice"
+																	>
+																	</ng-select>
+															
 																</div>
 																<div class="form-group">
 																	<label>Invoice type</label>
-																	<select class="">
-																		<option>Please Select</option>
-																		<option selected>Sales</option>
-																		<option>Sales excluding VAT</option>
-																	</select>
+																		<ng-select 
+																	formControlName="invoice_type"
+																	[items]="invoice_types"
+																	bindLabel="name"
+																	bindValue="name"
+																	class="form-group"
+																	autocomplete="off"
+																	placeholder="Select invoice"
+																	>
+																	</ng-select>
+																	
 																</div>
 																<div class="form-group">
 																	<label>Invoice as</label>
-																	<select class="">
-																		<option>Visible coloumns</option>
-																		<option selected>Date, Qty, Unit, Unit Price</option>
-																		<option>Cream Transport</option>
-																	</select>
+																	<ng-select 
+																	formControlName="invoice_as"
+																	[items]="invoice_ass"
+																	bindLabel="name"
+																	bindValue="name"
+																	class="form-group"
+																	autocomplete="off"
+																	placeholder="Select invoice as "
+																	>
+																	</ng-select>
+																
 																</div>
 																<div class="form-group">
 																	<label>Currency</label>
-																	<select class="">
-																		<option>Please Select</option>
-																		<option selected>Dollar</option>
-																		<option>Euro</option>
-																	</select>
+																	<ng-select 
+																	formControlName="currency"
+																	[items]="currencies"
+																	bindLabel="name"
+																	bindValue="name"
+																	class="form-group"
+																	autocomplete="off"
+																	placeholder="Select currency"
+																	>
+																	</ng-select>															
 																</div>
 																<div class="form-group">
 																	<label>Invoicing Language</label>
-																	<select class="">
-																		<option>Please Select</option>
-																		<option selected>English</option>
-																		<option>French</option>
-																	</select>
+																		<ng-select 
+																		formControlName="invoice_language"
+																		[items]="languages"
+																		bindLabel="name"
+																		bindValue="name"
+																		class="form-group"
+																		autocomplete="off"
+																		 placeholder="Select language"
+																		 >
+																		</ng-select>
 																</div>
 																<div class="form-group m-b-0">
 																	<label>Invoice header</label>

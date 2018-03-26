@@ -47,6 +47,16 @@ export class CustomerComponent implements OnInit {
 	customerPopulateParams = {}; /* Populate customer information for edit */
 	isUpdate = "Save"; /* Setting flag to check whether its new customer or existing customer */
 	isDelete = false; /* Setting flag to delete customer */
+
+		invoice_country: any; /*   Intialize country  */
+		invoice_language: any; /*   Intialize Language  */
+		payment_terms: any; /*   Intialize Payemtn Terms  */
+		vat: any; /*   Intialize Vat  */
+		countries = [{name: 'India'},{name: 'UK' }]; /* Assinging values to country dropdown  */
+		languages = [{name: 'English'},{name: 'French' }]; /* Assinging values to language dropdown  */
+		terms = [{name: '30 Days'},{name: '20 Days' }]; /* Assinging values to payment terms dropdown  */
+		vats = [{name: '3.5 %'},{name: '4.5 %' }]; /* Assinging values to vat dropdown  */
+
 	
 	  /*
 	   * Injecting required services into contructor
@@ -59,7 +69,7 @@ export class CustomerComponent implements OnInit {
 	ngOnInit() {			
 
 		/* Initiating customerForm formgroup variables */ 
-		this.customerForm = new FormGroup({
+		this.customerForm = new FormGroup({			
 			'customer_number': new FormControl(),
 			'company_name': new FormControl('', Validators.required),
 			'company_number': new FormControl('',CustomValidators.number),

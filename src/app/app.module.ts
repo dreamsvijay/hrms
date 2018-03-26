@@ -78,6 +78,10 @@ import { CreateInvoiceComponent } from './create-invoice/create-invoice.componen
 /* Importing Invoice API service */
 import { InvoiceService } from './services/api/invoice.service';
 import { LanguageComponent } from './language/language.component';
+/* Im NgSelect Dropdown    */
+
+import { NgSelectModule } from '@ng-select/ng-select';
+
 
 /* --------------------------- Custom modules --------------------------- ends */
 
@@ -117,7 +121,7 @@ let config = new AuthServiceConfig([
     EmailValidationDirective, /* Email validation directive  */ 
     InvoiceComponent,  /* Invoice module  */
     CreateInvoiceComponent, /* Create invoice module  */
-    HeaderComponent, LanguageComponent, /* Create header module  */
+    HeaderComponent, LanguageComponent /* Create header module  */
   ],
   imports: [
     AppRoutingModule, /* Route module for navigation */
@@ -125,7 +129,7 @@ let config = new AuthServiceConfig([
     FormsModule, /* Forms module for creating/using forms and elements */
     ReactiveFormsModule, /* For creating reactive forms */
     HttpClientModule, /* For making request to service calls */
-    
+    NgSelectModule, /* Ng Select modile  */
     /* For translation locale implementation - starts */
     TranslateModule.forRoot({
       loader: {

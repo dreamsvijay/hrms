@@ -30,6 +30,7 @@ export class InvoiceComponent implements OnInit {
 
 	invoices; /* defiing private variable to hold invoice list */
 	
+	
 	constructor( private invoiceService: InvoiceService, private authUserService: AuthUserService, private router: Router ) { }
 
 	ngOnInit() {

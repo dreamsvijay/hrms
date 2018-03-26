@@ -43,6 +43,24 @@ export class CreateInvoiceComponent implements OnInit {
 	invoiceNumber; /* Random invoice number */
 	dueDate; /* Invoice due date */
 	items;
+	payment_terms: any; /*   Intialize Payemtn Terms  */
+	unit: any; /*   Intialize Unit  */
+	company_name: any; /*   Intialize Company name  */
+	invoice_type: any; /*   Intialize Invoice  type  */
+	invoice_as: any; /*   Intialize Invoice  as  */
+	currency: any; /*   Intialize currency  as  */
+
+	terms = [{ name: '30 Days' }, { name: '20 Days' }]; /* Assinging values to payment terms dropdown  */
+	units = [{ name: 'Pcs' }, { name: 'Cm' }, { name:'Kg'}]; /* Assinging values to Units */
+	company_names = [{ name: 'Dreamguys Technologies' }, { name: 'Cream Transport'}]; /* Assinging values to Company name */
+
+	invoice_language: any; /*   Intialize Language  */
+	languages = [{ name: 'English' }, { name: 'French' }]; /* Assinging values to language dropdown  */
+	invoice_types = [{ name: 'Sales' }, { name: 'Sales excluding VAT' }]; /* Assinging values to language dropdown  */
+	invoice_ass = [{ name: 'Visible coloumns' }, { name: 'Date, Qty, Unit, Unit Price' },{name:"Cream Transport"}]; /* Assinging values to language dropdown  */
+	currencies = [{ name: 'Dollar' }, { name: 'Euro' }]; /* Assinging values to language dropdown  */
+
+
 	
 	  /*
 	   * Injecting required services into contructor
@@ -67,7 +85,10 @@ export class CreateInvoiceComponent implements OnInit {
 			'payment_terms': new FormControl(''),
 			'message': new FormControl(''),
 			'footer_note': new FormControl(),
-			'items': this.formBuilder.array([ this.createItem() ])
+			'items': this.formBuilder.array([ this.createItem() ]),
+			'company_name':new FormControl(),
+			'invoice_language':new FormControl(),
+			'invoice_type':new FormControl()
 		});
   }
 
